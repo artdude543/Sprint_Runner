@@ -6,6 +6,7 @@
     Dim player1Health As Integer = 100
     Dim player1Go As Boolean = True
     Dim player2Health As Integer = 100
+    Dim player2Go As Boolean = True
     Dim player3Health As Integer = 100
     Dim player4Health As Integer = 100
 
@@ -13,6 +14,8 @@
 
     Dim player1MoveA As Boolean
     Dim player1MoveD As Boolean
+    Dim player2MoveR As Boolean
+    Dim player2MoveL As Boolean
 
     Private Sub Race_Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -23,6 +26,9 @@
         lblPlayer2Name.Text = "Player 2: " + player2Name
 
         progPlayer1.Value = 100
+        progPlayer2.Value = 100
+        progPlayer3.Value = 100
+        progPlayer4.Value = 100
 
     End Sub
 
@@ -52,6 +58,20 @@
             player1Health = player1Health
             player1Go = True
 
+        ElseIf (player2Health = 0) Then
+
+            player2Go = False
+
+            Do Until player2Health = 100
+
+                player2Health = player2Health + 1
+
+            Loop
+
+            progPlayer2.Value = player1Health
+            player2Health = player2Health
+            player2Go = True
+
         Else
 
             If Asc(e.KeyChar) = 97 And player1Go = True And player1MoveA = False Then
@@ -59,7 +79,7 @@
                 picPlayer1.Left = picPlayer1.Left + initMove
 
                 Dim healthLevel As Integer
-                healthLevel = player1Health - 5
+                healthLevel = player1Health - 4
                 progPlayer1.Value = Int(healthLevel)
                 player1Health = healthLevel
 
@@ -71,12 +91,36 @@
                 picPlayer1.Left = picPlayer1.Left + initMove
 
                 Dim healthLevel As Integer
-                healthLevel = player1Health - 5
+                healthLevel = player1Health - 4
                 progPlayer1.Value = Int(healthLevel)
                 player1Health = healthLevel
 
                 player1MoveA = False
                 player1MoveD = True
+
+            ElseIf Asc(e.KeyChar) = 111 And player2Go = True And player2MoveL = False Then
+
+                picPlayer2.Left = picPlayer2.Left + initMove
+
+                Dim healthLevel As Integer
+                healthLevel = player2Health - 4
+                progPlayer2.Value = Int(healthLevel)
+                player2Health = healthLevel
+
+                player2MoveL = True
+                player2MoveR = False
+
+            ElseIf Asc(e.KeyChar) = 112 And player2Go = True And player2MoveR = False Then
+
+                picPlayer2.Left = picPlayer2.Left + initMove
+
+                Dim healthLevel As Integer
+                healthLevel = player2Health - 4
+                progPlayer2.Value = Int(healthLevel)
+                player2Health = healthLevel
+
+                player2MoveL = False
+                player2MoveR = True
 
             End If
 
