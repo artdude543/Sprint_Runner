@@ -35,27 +35,31 @@ Partial Class Race_Form
         Me.MenuStripRace = New System.Windows.Forms.MenuStrip()
         Me.cmdFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdClose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdReset = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdAbout = New System.Windows.Forms.ToolStripMenuItem()
-        Me.picPlayer1 = New System.Windows.Forms.PictureBox()
-        Me.picPlayer2 = New System.Windows.Forms.PictureBox()
-        Me.picPlayer3 = New System.Windows.Forms.PictureBox()
-        Me.picPlayer4 = New System.Windows.Forms.PictureBox()
         Me.tmrRace = New System.Windows.Forms.Timer(Me.components)
+        Me.gbRaceStats = New System.Windows.Forms.GroupBox()
+        Me.picPlayer4 = New System.Windows.Forms.PictureBox()
+        Me.picPlayer3 = New System.Windows.Forms.PictureBox()
+        Me.picPlayer2 = New System.Windows.Forms.PictureBox()
+        Me.picPlayer1 = New System.Windows.Forms.PictureBox()
+        Me.picFinishLine = New System.Windows.Forms.PictureBox()
         Me.StatusStripRace.SuspendLayout()
         Me.MenuStripRace.SuspendLayout()
-        CType(Me.picPlayer1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picPlayer2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picPlayer3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picPlayer4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picPlayer3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picPlayer2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picPlayer1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picFinishLine, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'StatusStripRace
         '
         Me.StatusStripRace.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblPlayer1Name, Me.progPlayer1, Me.lblPlayer2Name, Me.progPlayer2, Me.lblPlayer3Name, Me.progPlayer3, Me.lblPlayer4Name, Me.progPlayer4})
-        Me.StatusStripRace.Location = New System.Drawing.Point(0, 464)
+        Me.StatusStripRace.Location = New System.Drawing.Point(0, 505)
         Me.StatusStripRace.Name = "StatusStripRace"
-        Me.StatusStripRace.Size = New System.Drawing.Size(857, 22)
+        Me.StatusStripRace.Size = New System.Drawing.Size(1038, 22)
         Me.StatusStripRace.TabIndex = 0
         '
         'lblPlayer1Name
@@ -104,10 +108,10 @@ Partial Class Race_Form
         '
         'MenuStripRace
         '
-        Me.MenuStripRace.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmdFile, Me.cmdHelp})
+        Me.MenuStripRace.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmdFile, Me.cmdReset, Me.cmdHelp})
         Me.MenuStripRace.Location = New System.Drawing.Point(0, 0)
         Me.MenuStripRace.Name = "MenuStripRace"
-        Me.MenuStripRace.Size = New System.Drawing.Size(857, 24)
+        Me.MenuStripRace.Size = New System.Drawing.Size(1038, 24)
         Me.MenuStripRace.TabIndex = 1
         Me.MenuStripRace.Text = "MenuStripRace"
         '
@@ -124,6 +128,12 @@ Partial Class Race_Form
         Me.cmdClose.Size = New System.Drawing.Size(103, 22)
         Me.cmdClose.Text = "Close"
         '
+        'cmdReset
+        '
+        Me.cmdReset.Name = "cmdReset"
+        Me.cmdReset.Size = New System.Drawing.Size(81, 20)
+        Me.cmdReset.Text = "Reset Game"
+        '
         'cmdHelp
         '
         Me.cmdHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmdAbout})
@@ -137,35 +147,18 @@ Partial Class Race_Form
         Me.cmdAbout.Size = New System.Drawing.Size(107, 22)
         Me.cmdAbout.Text = "About"
         '
-        'picPlayer1
+        'tmrRace
         '
-        Me.picPlayer1.Image = Global.Sprint_Runner.My.Resources.Resources.runnerRunning
-        Me.picPlayer1.Location = New System.Drawing.Point(12, 27)
-        Me.picPlayer1.Name = "picPlayer1"
-        Me.picPlayer1.Size = New System.Drawing.Size(68, 87)
-        Me.picPlayer1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.picPlayer1.TabIndex = 2
-        Me.picPlayer1.TabStop = False
+        Me.tmrRace.Interval = 1000
         '
-        'picPlayer2
+        'gbRaceStats
         '
-        Me.picPlayer2.Image = Global.Sprint_Runner.My.Resources.Resources.runnerRunning
-        Me.picPlayer2.Location = New System.Drawing.Point(12, 120)
-        Me.picPlayer2.Name = "picPlayer2"
-        Me.picPlayer2.Size = New System.Drawing.Size(68, 87)
-        Me.picPlayer2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.picPlayer2.TabIndex = 3
-        Me.picPlayer2.TabStop = False
-        '
-        'picPlayer3
-        '
-        Me.picPlayer3.Image = Global.Sprint_Runner.My.Resources.Resources.runnerRunning
-        Me.picPlayer3.Location = New System.Drawing.Point(12, 213)
-        Me.picPlayer3.Name = "picPlayer3"
-        Me.picPlayer3.Size = New System.Drawing.Size(68, 87)
-        Me.picPlayer3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.picPlayer3.TabIndex = 4
-        Me.picPlayer3.TabStop = False
+        Me.gbRaceStats.Location = New System.Drawing.Point(760, 399)
+        Me.gbRaceStats.Name = "gbRaceStats"
+        Me.gbRaceStats.Size = New System.Drawing.Size(266, 103)
+        Me.gbRaceStats.TabIndex = 6
+        Me.gbRaceStats.TabStop = False
+        Me.gbRaceStats.Text = "Race Stats"
         '
         'picPlayer4
         '
@@ -177,32 +170,74 @@ Partial Class Race_Form
         Me.picPlayer4.TabIndex = 5
         Me.picPlayer4.TabStop = False
         '
-        'tmrRace
+        'picPlayer3
         '
-        Me.tmrRace.Interval = 1000
+        Me.picPlayer3.Image = Global.Sprint_Runner.My.Resources.Resources.runnerRunning
+        Me.picPlayer3.Location = New System.Drawing.Point(12, 213)
+        Me.picPlayer3.Name = "picPlayer3"
+        Me.picPlayer3.Size = New System.Drawing.Size(68, 87)
+        Me.picPlayer3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.picPlayer3.TabIndex = 4
+        Me.picPlayer3.TabStop = False
+        '
+        'picPlayer2
+        '
+        Me.picPlayer2.Image = Global.Sprint_Runner.My.Resources.Resources.runnerRunning
+        Me.picPlayer2.Location = New System.Drawing.Point(12, 120)
+        Me.picPlayer2.Name = "picPlayer2"
+        Me.picPlayer2.Size = New System.Drawing.Size(68, 87)
+        Me.picPlayer2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.picPlayer2.TabIndex = 3
+        Me.picPlayer2.TabStop = False
+        '
+        'picPlayer1
+        '
+        Me.picPlayer1.Image = Global.Sprint_Runner.My.Resources.Resources.runnerRunning
+        Me.picPlayer1.Location = New System.Drawing.Point(12, 27)
+        Me.picPlayer1.Name = "picPlayer1"
+        Me.picPlayer1.Size = New System.Drawing.Size(68, 87)
+        Me.picPlayer1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.picPlayer1.TabIndex = 2
+        Me.picPlayer1.TabStop = False
+        '
+        'picFinishLine
+        '
+        Me.picFinishLine.Image = Global.Sprint_Runner.My.Resources.Resources.finishLine
+        Me.picFinishLine.Location = New System.Drawing.Point(958, 27)
+        Me.picFinishLine.Name = "picFinishLine"
+        Me.picFinishLine.Size = New System.Drawing.Size(68, 366)
+        Me.picFinishLine.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.picFinishLine.TabIndex = 7
+        Me.picFinishLine.TabStop = False
         '
         'Race_Form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(857, 486)
+        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ClientSize = New System.Drawing.Size(1038, 527)
+        Me.Controls.Add(Me.picFinishLine)
+        Me.Controls.Add(Me.gbRaceStats)
         Me.Controls.Add(Me.picPlayer4)
         Me.Controls.Add(Me.picPlayer3)
         Me.Controls.Add(Me.picPlayer2)
         Me.Controls.Add(Me.picPlayer1)
         Me.Controls.Add(Me.StatusStripRace)
         Me.Controls.Add(Me.MenuStripRace)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.MainMenuStrip = Me.MenuStripRace
+        Me.MaximizeBox = False
         Me.Name = "Race_Form"
         Me.Text = " Sprint Runner | The Race"
         Me.StatusStripRace.ResumeLayout(False)
         Me.StatusStripRace.PerformLayout()
         Me.MenuStripRace.ResumeLayout(False)
         Me.MenuStripRace.PerformLayout()
-        CType(Me.picPlayer1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picPlayer2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picPlayer3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picPlayer4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picPlayer3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picPlayer2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picPlayer1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picFinishLine, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -226,5 +261,8 @@ Partial Class Race_Form
     Friend WithEvents lblPlayer4Name As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents progPlayer4 As System.Windows.Forms.ToolStripProgressBar
     Friend WithEvents tmrRace As System.Windows.Forms.Timer
+    Friend WithEvents cmdReset As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents gbRaceStats As System.Windows.Forms.GroupBox
+    Friend WithEvents picFinishLine As System.Windows.Forms.PictureBox
 
 End Class

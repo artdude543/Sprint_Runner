@@ -2,13 +2,15 @@
 
     Dim player1Name As String
     Dim player2Name As String
+    Dim player3Name As String
+    Dim player4Name As String
 
-    Dim player1Health As Integer = 100
+    Dim player1Health As Double = 100
     Dim player1Go As Boolean = True
-    Dim player2Health As Integer = 100
+    Dim player2Health As Double = 100
     Dim player2Go As Boolean = True
-    Dim player3Health As Integer = 100
-    Dim player4Health As Integer = 100
+    Dim player3Health As Double = 100
+    Dim player4Health As Double = 100
 
     Dim initMove As Integer
 
@@ -19,11 +21,25 @@
 
     Private Sub Race_Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        Dim CPUNames As New ArrayList
+        Dim randomInt As New Random
+
+        CPUNames.Add("Garry")
+        CPUNames.Add("John")
+        CPUNames.Add("Keith")
+        CPUNames.Add("Ian")
+
+        player3Name = CPUNames.Item(Int(Rnd() * (CPUNames.Count - 1)))
+        player4Name = CPUNames.Item(Int(Rnd() * (CPUNames.Count - 1)))
+
+
         player1Name = My.MySettings.Default.Player1Name
         player2Name = My.MySettings.Default.Player2Name
 
-        lblPlayer1Name.Text = "Player 1: " + player1Name
-        lblPlayer2Name.Text = "Player 2: " + player2Name
+        lblPlayer1Name.Text = "Player 1: " + player1Name + " | Stamina:"
+        lblPlayer2Name.Text = "Player 2: " + player2Name + " | Stamina:"
+        lblPlayer3Name.Text = "Player 3: " + player3Name + " | Stamina:"
+        lblPlayer4Name.Text = "Player 4: " + player4Name + " | Stamina:"
 
         progPlayer1.Value = 100
         progPlayer2.Value = 100
@@ -50,7 +66,7 @@
 
             Do Until player1Health = 100
 
-                player1Health = player1Health + 1
+                player1Health = player1Health + 0.5
 
             Loop
 
@@ -64,7 +80,7 @@
 
             Do Until player2Health = 100
 
-                player2Health = player2Health + 1
+                player2Health = player2Health + 0.5
 
             Loop
 
@@ -78,7 +94,7 @@
 
                 picPlayer1.Left = picPlayer1.Left + initMove
 
-                Dim healthLevel As Integer
+                Dim healthLevel As Double
                 healthLevel = player1Health - 4
                 progPlayer1.Value = Int(healthLevel)
                 player1Health = healthLevel
@@ -90,7 +106,7 @@
 
                 picPlayer1.Left = picPlayer1.Left + initMove
 
-                Dim healthLevel As Integer
+                Dim healthLevel As Double
                 healthLevel = player1Health - 4
                 progPlayer1.Value = Int(healthLevel)
                 player1Health = healthLevel
@@ -102,7 +118,7 @@
 
                 picPlayer2.Left = picPlayer2.Left + initMove
 
-                Dim healthLevel As Integer
+                Dim healthLevel As Double
                 healthLevel = player2Health - 4
                 progPlayer2.Value = Int(healthLevel)
                 player2Health = healthLevel
@@ -114,7 +130,7 @@
 
                 picPlayer2.Left = picPlayer2.Left + initMove
 
-                Dim healthLevel As Integer
+                Dim healthLevel As Double
                 healthLevel = player2Health - 4
                 progPlayer2.Value = Int(healthLevel)
                 player2Health = healthLevel
@@ -125,19 +141,6 @@
             End If
 
         End If
-
-    End Sub
-
-    Private Sub resetGame()
-
-        ' Reset Game Settings
-        tmrRace.Enabled = False
-
-        ' Reset Player Health Values
-        player1Health = 100
-        player2Health = 100
-        player3Health = 100
-        player4Health = 100
 
     End Sub
 
@@ -156,6 +159,29 @@
     Private Sub closeApplication()
 
         Application.Exit()
+
+    End Sub
+
+    Private Sub cmdReset_Click(sender As Object, e As EventArgs) Handles cmdReset.Click
+
+        ' Reset Game Settings
+        tmrRace.Enabled = False
+
+        ' Reset Player Settings / Variables
+        player1Health = 100
+        player1Go = True
+        progPlayer1.Value = player1Health
+        player2Health = 100
+        player2Go = True
+        progPlayer2.Value = player2Health
+        player3Health = 100
+        player4Health = 100
+
+        ' Reset Player Locations
+        picPlayer1.Location = New Point(12, 27)
+        picPlayer2.Location = New Point(12, 120)
+        picPlayer3.Location = New Point(12, 213)
+        picPlayer4.Location = New Point(12, 306)
 
     End Sub
 
