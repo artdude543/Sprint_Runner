@@ -5,10 +5,14 @@
     Dim player3Name As String
     Dim player4Name As String
 
+    Dim player1Healing As Boolean = False
     Dim player1Health As Double = 100
     Dim player1Go As Boolean = True
+
+    Dim player2Healing As Boolean = False
     Dim player2Health As Double = 100
     Dim player2Go As Boolean = True
+
     Dim player3Health As Double = 100
     Dim player4Health As Double = 100
 
@@ -50,49 +54,98 @@
 
     Private Sub tmrRace_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrRace.Tick
 
-        ' CPU Players
+        Dim CPU1 As Integer
+        Dim CPU2 As Integer
 
+        Randomize()
+        CPU1 = Int(Rnd() * 3) + 1
+        CPU2 = Int(Rnd() * 3) + 1
+
+        picPlayer3.Left = picPlayer3.Left + CPU1
+        picPlayer4.Left = picPlayer4.Left + CPU2
+
+    End Sub
+
+    Private Sub tmrHealth_Tick() Handles tmrHealth.Tick
+
+        If (player1Healing = True) Then
+
+            ' Player 1
+            player1Health = player1Health + 4
+            progPlayer1.Value = player1Health
+
+            player1Health = player1Health
+
+            If player1Health = 100 Then
+
+                tmrHealth.Enabled = False
+                player1Go = True
+                player1Healing = False
+
+            End If
+
+        End If
+
+        If (player2Healing = True) Then
+
+            ' Player 2
+            player2Health = player2Health + 4
+            progPlayer2.Value = player2Health
+
+            player2Health = player2Health
+
+            If player2Health = 100 Then
+
+                tmrHealth.Enabled = False
+                player2Go = True
+                player2Healing = False
+
+            End If
+
+        End If
 
     End Sub
 
     Private Sub Race_Form_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Me.KeyPress
 
         Randomize()
-        initMove = Int(Rnd() * 10) + 1
+        initMove = Int(Rnd() * 3) + 1
+
+        If picPlayer1.Left >= 960 Then
+            tmrHealth.Stop()
+            tmrRace.Stop()
+            MsgBox("sdfjknsdfsdhf")
+        End If
 
         If (player1Health = 0) Then
 
             player1Go = False
+            player1Healing = True
 
-            Do Until player1Health = 100
-
-                player1Health = player1Health + 0.5
-
-            Loop
-
-            progPlayer1.Value = player1Health
-            player1Health = player1Health
-            player1Go = True
+            tmrHealth.Enabled = True
+            tmrHealth.Start()
 
         ElseIf (player2Health = 0) Then
 
             player2Go = False
+            player2Healing = True
 
-            Do Until player2Health = 100
-
-                player2Health = player2Health + 0.5
-
-            Loop
-
-            progPlayer2.Value = player1Health
-            player2Health = player2Health
-            player2Go = True
+            tmrHealth.Enabled = True
+            tmrHealth.Start()
 
         Else
 
-            If Asc(e.KeyChar) = 97 And player1Go = True And player1MoveA = False Then
+            If Asc(e.KeyChar) = 97 And player1Go = True And player1MoveA = False And player1Healing = False Then
 
-                picPlayer1.Left = picPlayer1.Left + initMove
+                If (player1Health > 50) Then
+
+                    picPlayer1.Left = picPlayer1.Left + initMove
+
+                Else
+
+                    picPlayer1.Left = picPlayer1.Left + 1
+
+                End If
 
                 Dim healthLevel As Double
                 healthLevel = player1Health - 4
@@ -102,9 +155,17 @@
                 player1MoveA = True
                 player1MoveD = False
 
-            ElseIf Asc(e.KeyChar) = 100 And player1Go = True And player1MoveD = False Then
+            ElseIf Asc(e.KeyChar) = 100 And player1Go = True And player1MoveD = False And player1Healing = False Then
 
-                picPlayer1.Left = picPlayer1.Left + initMove
+                If (player1Health > 50) Then
+
+                    picPlayer1.Left = picPlayer1.Left + initMove
+
+                Else
+
+                    picPlayer1.Left = picPlayer1.Left + 1
+
+                End If
 
                 Dim healthLevel As Double
                 healthLevel = player1Health - 4
@@ -114,7 +175,7 @@
                 player1MoveA = False
                 player1MoveD = True
 
-            ElseIf Asc(e.KeyChar) = 111 And player2Go = True And player2MoveL = False Then
+            ElseIf Asc(e.KeyChar) = 111 And player2Go = True And player2MoveL = False And player2Healing = False Then
 
                 picPlayer2.Left = picPlayer2.Left + initMove
 
@@ -126,7 +187,7 @@
                 player2MoveL = True
                 player2MoveR = False
 
-            ElseIf Asc(e.KeyChar) = 112 And player2Go = True And player2MoveR = False Then
+            ElseIf Asc(e.KeyChar) = 112 And player2Go = True And player2MoveR = False And player2Healing = False Then
 
                 picPlayer2.Left = picPlayer2.Left + initMove
 
@@ -185,4 +246,14 @@
 
     End Sub
 
+    Private Sub Button1_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
+        Call Race_Form_KeyPress(sender, e)
+    End Sub
+
+    Private Sub DebugToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DebugToolStripMenuItem.Click
+
+        tmrRace.Enabled = True
+        tmrRace.Start()
+
+    End Sub
 End Class
