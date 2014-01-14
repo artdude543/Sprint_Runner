@@ -1,22 +1,26 @@
 ﻿Public Class Race_Form
 
-    Dim player1Name As String
-    Dim player2Name As String
-    Dim player3Name As String
-    Dim player4Name As String
+    Dim totalPlayers As Integer
+    Dim CPUMode As Boolean
 
+    Dim player1Name As String
     Dim player1Healing As Boolean = False
     Dim player1Health As Double = 100
-    Dim player1Go As Boolean = True
+    Dim player1Go As Boolean = False
 
+    Dim player2Name As String
     Dim player2Healing As Boolean = False
     Dim player2Health As Double = 100
-    Dim player2Go As Boolean = True
+    Dim player2Go As Boolean = False
 
+    Dim player3Name As String
     Dim player3Health As Double = 100
+
+    Dim player4Name As String
     Dim player4Health As Double = 100
 
     Dim initMove As Integer
+    Dim initMoveLow As Integer
 
     Dim player1MoveA As Boolean
     Dim player1MoveD As Boolean
@@ -26,7 +30,8 @@
     Private Sub Race_Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         Dim CPUNames As New ArrayList
-        Dim randomInt As New Random
+        totalPlayers = My.MySettings.Default.TotalPlayers
+        CPUMode = My.MySettings.Default.CPUMode
 
         CPUNames.Add("Garry")
         CPUNames.Add("John")
@@ -36,23 +41,45 @@
         player3Name = CPUNames.Item(Int(Rnd() * (CPUNames.Count - 1)))
         player4Name = CPUNames.Item(Int(Rnd() * (CPUNames.Count - 1)))
 
+        ' Load Player Names + Game Settings
+        If (totalPlayers = 1) Then
 
-        player1Name = My.MySettings.Default.Player1Name
-        player2Name = My.MySettings.Default.Player2Name
+            player1Name = My.MySettings.Default.Player1Name
+            player1Go = True
 
-        lblPlayer1Name.Text = "Player 1: " + player1Name + " | Stamina:"
-        lblPlayer2Name.Text = "Player 2: " + player2Name + " | Stamina:"
+            lblPlayer1Name.Text = "Player 1: " + player1Name + " | Stamina:"
+            lblPlayer2Name.Text = "Player 2: " + "(On Sick Leave)" + " | Stamina:"
+            progPlayer1.Value = 100
+
+        ElseIf (totalPlayers = 2) Then
+
+            player1Name = My.MySettings.Default.Player1Name
+            player2Name = My.MySettings.Default.Player2Name
+            player1Go = True
+            player2Go = True
+
+            lblPlayer1Name.Text = "Player 1: " + player1Name + " | Stamina:"
+            lblPlayer2Name.Text = "Player 2: " + player2Name + " | Stamina:"
+            progPlayer1.Value = 100
+            progPlayer2.Value = 100
+
+        ElseIf (CPUMode = True) Then
+
+            ' Do Stuff
+
+        End If
+
+        ' Continue Loading Settings
+          
         lblPlayer3Name.Text = "Player 3: " + player3Name + " | Stamina:"
         lblPlayer4Name.Text = "Player 4: " + player4Name + " | Stamina:"
 
-        progPlayer1.Value = 100
-        progPlayer2.Value = 100
         progPlayer3.Value = 100
         progPlayer4.Value = 100
 
     End Sub
 
-    Private Sub tmrRace_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrRace.Tick
+    Private Sub tmrRace_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         Dim CPU1 As Integer
         Dim CPU2 As Integer
@@ -66,53 +93,14 @@
 
     End Sub
 
-    Private Sub tmrHealth_Tick() Handles tmrHealth.Tick
-
-        If (player1Healing = True) Then
-
-            ' Player 1
-            player1Health = player1Health + 4
-            progPlayer1.Value = player1Health
-
-            player1Health = player1Health
-
-            If player1Health = 100 Then
-
-                tmrHealth.Enabled = False
-                player1Go = True
-                player1Healing = False
-
-            End If
-
-        End If
-
-        If (player2Healing = True) Then
-
-            ' Player 2
-            player2Health = player2Health + 4
-            progPlayer2.Value = player2Health
-
-            player2Health = player2Health
-
-            If player2Health = 100 Then
-
-                tmrHealth.Enabled = False
-                player2Go = True
-                player2Healing = False
-
-            End If
-
-        End If
-
-    End Sub
-
     Private Sub Race_Form_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Me.KeyPress
 
         Randomize()
-        initMove = Int(Rnd() * 3) + 1
+        initMove = Int(Rnd() * 12) + 1
+        initMoveLow = Int(Rnd() * 6) + 1
 
         If picPlayer1.Left >= 960 Then
-            tmrHealth.Stop()
+            tmrPlayer1.Stop()
             tmrRace.Stop()
             MsgBox("sdfjknsdfsdhf")
         End If
@@ -122,16 +110,16 @@
             player1Go = False
             player1Healing = True
 
-            tmrHealth.Enabled = True
-            tmrHealth.Start()
+            tmrPlayer1.Enabled = True
+            tmrPlayer1.Start()
 
         ElseIf (player2Health = 0) Then
 
             player2Go = False
             player2Healing = True
 
-            tmrHealth.Enabled = True
-            tmrHealth.Start()
+            tmrPlayer2.Enabled = True
+            tmrPlayer2.Start()
 
         Else
 
@@ -143,12 +131,12 @@
 
                 Else
 
-                    picPlayer1.Left = picPlayer1.Left + 1
+                    picPlayer1.Left = picPlayer1.Left + initMoveLow
 
                 End If
 
                 Dim healthLevel As Double
-                healthLevel = player1Health - 4
+                healthLevel = player1Health - 2
                 progPlayer1.Value = Int(healthLevel)
                 player1Health = healthLevel
 
@@ -163,12 +151,12 @@
 
                 Else
 
-                    picPlayer1.Left = picPlayer1.Left + 1
+                    picPlayer1.Left = picPlayer1.Left + initMoveLow
 
                 End If
 
                 Dim healthLevel As Double
-                healthLevel = player1Health - 4
+                healthLevel = player1Health - 2
                 progPlayer1.Value = Int(healthLevel)
                 player1Health = healthLevel
 
@@ -180,7 +168,7 @@
                 picPlayer2.Left = picPlayer2.Left + initMove
 
                 Dim healthLevel As Double
-                healthLevel = player2Health - 4
+                healthLevel = player2Health - 2
                 progPlayer2.Value = Int(healthLevel)
                 player2Health = healthLevel
 
@@ -192,7 +180,7 @@
                 picPlayer2.Left = picPlayer2.Left + initMove
 
                 Dim healthLevel As Double
-                healthLevel = player2Health - 4
+                healthLevel = player2Health - 2
                 progPlayer2.Value = Int(healthLevel)
                 player2Health = healthLevel
 
@@ -205,49 +193,66 @@
 
     End Sub
 
+    Private Sub tmrPlayer1_Tick(sender As Object, e As EventArgs) Handles tmrPlayer1.Tick
+
+        If (player1Healing = True) Then
+
+            ' Player 1
+            player1Health = player1Health + 2
+            progPlayer1.Value = player1Health
+
+            player1Health = player1Health
+
+            If player1Health = 100 Then
+
+                tmrPlayer1.Enabled = False
+                player1Go = True
+                player1Healing = False
+
+            End If
+
+        End If
+
+    End Sub
+
+    Private Sub tmrPlayer2_Tick(sender As Object, e As EventArgs) Handles tmrPlayer2.Tick
+
+        If (player2Healing = True) Then
+
+            ' Player 2
+            player2Health = player2Health + 2
+            progPlayer2.Value = player2Health
+
+            player2Health = player2Health
+
+            If player2Health = 100 Then
+
+                tmrPlayer2.Enabled = False
+                player2Go = True
+                player2Healing = False
+
+            End If
+
+        End If
+
+    End Sub
+
     Private Sub Race_Form_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
 
-        Call closeApplication()
+        Call closeApplication() ' Close Application
 
     End Sub
 
     Private Sub cmdClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdClose.Click
 
-        Call closeApplication()
+        Call closeApplication() ' Close Application
 
     End Sub
 
     Private Sub closeApplication()
 
-        Application.Exit()
+        Application.Exit() ' Close Application
 
-    End Sub
-
-    Private Sub cmdReset_Click(sender As Object, e As EventArgs) Handles cmdReset.Click
-
-        ' Reset Game Settings
-        tmrRace.Enabled = False
-
-        ' Reset Player Settings / Variables
-        player1Health = 100
-        player1Go = True
-        progPlayer1.Value = player1Health
-        player2Health = 100
-        player2Go = True
-        progPlayer2.Value = player2Health
-        player3Health = 100
-        player4Health = 100
-
-        ' Reset Player Locations
-        picPlayer1.Location = New Point(12, 27)
-        picPlayer2.Location = New Point(12, 120)
-        picPlayer3.Location = New Point(12, 213)
-        picPlayer4.Location = New Point(12, 306)
-
-    End Sub
-
-    Private Sub Button1_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
-        Call Race_Form_KeyPress(sender, e)
     End Sub
 
     Private Sub DebugToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DebugToolStripMenuItem.Click
@@ -256,4 +261,35 @@
         tmrRace.Start()
 
     End Sub
+    Private Sub cmdReset_Click(sender As Object, e As EventArgs) Handles cmdReset.Click
+
+        ' Reset Game Settings
+        tmrRace.Enabled = False
+
+        ' Reset Player Settings / Variables
+
+        ' Player 1
+        player1Health = 100
+        player1Go = True
+        progPlayer1.Value = player1Health
+
+        ' Player 2
+        player2Health = 100
+        player2Go = True
+        progPlayer2.Value = player2Health
+
+        ' Player 3
+        player3Health = 100
+
+        ' Player 4
+        player4Health = 100
+
+        ' Reset Player Locations
+        picPlayer1.Location = New Point(12, 27) ' Player 1
+        picPlayer2.Location = New Point(12, 120) ' Player 2
+        picPlayer3.Location = New Point(12, 213) ' Player 3
+        picPlayer4.Location = New Point(12, 306) ' Player 4
+
+    End Sub
+
 End Class

@@ -38,15 +38,18 @@ Partial Class Race_Form
         Me.cmdReset = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdAbout = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tmrRace = New System.Windows.Forms.Timer(Me.components)
+        Me.DebugToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.gbRaceStats = New System.Windows.Forms.GroupBox()
         Me.picPlayer4 = New System.Windows.Forms.PictureBox()
         Me.picPlayer3 = New System.Windows.Forms.PictureBox()
         Me.picPlayer2 = New System.Windows.Forms.PictureBox()
         Me.picPlayer1 = New System.Windows.Forms.PictureBox()
         Me.picFinishLine = New System.Windows.Forms.PictureBox()
-        Me.tmrHealth = New System.Windows.Forms.Timer(Me.components)
-        Me.DebugToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tmrRace = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrPlayer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrPlayer2 = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrPlayer3 = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrPlayer4 = New System.Windows.Forms.Timer(Me.components)
         Me.StatusStripRace.SuspendLayout()
         Me.MenuStripRace.SuspendLayout()
         CType(Me.picPlayer4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -67,7 +70,7 @@ Partial Class Race_Form
         'lblPlayer1Name
         '
         Me.lblPlayer1Name.Name = "lblPlayer1Name"
-        Me.lblPlayer1Name.Size = New System.Drawing.Size(50, 17)
+        Me.lblPlayer1Name.Size = New System.Drawing.Size(51, 17)
         Me.lblPlayer1Name.Text = "Player 1:"
         '
         'progPlayer1
@@ -78,7 +81,7 @@ Partial Class Race_Form
         'lblPlayer2Name
         '
         Me.lblPlayer2Name.Name = "lblPlayer2Name"
-        Me.lblPlayer2Name.Size = New System.Drawing.Size(50, 17)
+        Me.lblPlayer2Name.Size = New System.Drawing.Size(51, 17)
         Me.lblPlayer2Name.Text = "Player 2:"
         '
         'progPlayer2
@@ -89,7 +92,7 @@ Partial Class Race_Form
         'lblPlayer3Name
         '
         Me.lblPlayer3Name.Name = "lblPlayer3Name"
-        Me.lblPlayer3Name.Size = New System.Drawing.Size(50, 17)
+        Me.lblPlayer3Name.Size = New System.Drawing.Size(51, 17)
         Me.lblPlayer3Name.Text = "Player 3:"
         '
         'progPlayer3
@@ -100,7 +103,7 @@ Partial Class Race_Form
         'lblPlayer4Name
         '
         Me.lblPlayer4Name.Name = "lblPlayer4Name"
-        Me.lblPlayer4Name.Size = New System.Drawing.Size(50, 17)
+        Me.lblPlayer4Name.Size = New System.Drawing.Size(51, 17)
         Me.lblPlayer4Name.Text = "Player 4:"
         '
         'progPlayer4
@@ -121,37 +124,39 @@ Partial Class Race_Form
         '
         Me.cmdFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmdClose})
         Me.cmdFile.Name = "cmdFile"
-        Me.cmdFile.Size = New System.Drawing.Size(35, 20)
+        Me.cmdFile.Size = New System.Drawing.Size(37, 20)
         Me.cmdFile.Text = "File"
         '
         'cmdClose
         '
         Me.cmdClose.Name = "cmdClose"
-        Me.cmdClose.Size = New System.Drawing.Size(111, 22)
+        Me.cmdClose.Size = New System.Drawing.Size(103, 22)
         Me.cmdClose.Text = "Close"
         '
         'cmdReset
         '
         Me.cmdReset.Name = "cmdReset"
-        Me.cmdReset.Size = New System.Drawing.Size(77, 20)
+        Me.cmdReset.Size = New System.Drawing.Size(81, 20)
         Me.cmdReset.Text = "Reset Game"
         '
         'cmdHelp
         '
         Me.cmdHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmdAbout})
         Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.Size = New System.Drawing.Size(40, 20)
+        Me.cmdHelp.Size = New System.Drawing.Size(44, 20)
         Me.cmdHelp.Text = "Help"
         '
         'cmdAbout
         '
         Me.cmdAbout.Name = "cmdAbout"
-        Me.cmdAbout.Size = New System.Drawing.Size(114, 22)
+        Me.cmdAbout.Size = New System.Drawing.Size(107, 22)
         Me.cmdAbout.Text = "About"
         '
-        'tmrRace
+        'DebugToolStripMenuItem
         '
-        Me.tmrRace.Interval = 6
+        Me.DebugToolStripMenuItem.Name = "DebugToolStripMenuItem"
+        Me.DebugToolStripMenuItem.Size = New System.Drawing.Size(54, 20)
+        Me.DebugToolStripMenuItem.Text = "Debug"
         '
         'gbRaceStats
         '
@@ -212,15 +217,25 @@ Partial Class Race_Form
         Me.picFinishLine.TabIndex = 7
         Me.picFinishLine.TabStop = False
         '
-        'tmrHealth
+        'tmrRace
         '
-        Me.tmrHealth.Interval = 5
+        Me.tmrRace.Interval = 5
         '
-        'DebugToolStripMenuItem
+        'tmrPlayer1
         '
-        Me.DebugToolStripMenuItem.Name = "DebugToolStripMenuItem"
-        Me.DebugToolStripMenuItem.Size = New System.Drawing.Size(50, 20)
-        Me.DebugToolStripMenuItem.Text = "Debug"
+        Me.tmrPlayer1.Interval = 6
+        '
+        'tmrPlayer2
+        '
+        Me.tmrPlayer2.Interval = 6
+        '
+        'tmrPlayer3
+        '
+        Me.tmrPlayer3.Interval = 6
+        '
+        'tmrPlayer4
+        '
+        Me.tmrPlayer4.Interval = 6
         '
         'Race_Form
         '
@@ -240,6 +255,7 @@ Partial Class Race_Form
         Me.MainMenuStrip = Me.MenuStripRace
         Me.MaximizeBox = False
         Me.Name = "Race_Form"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Timer"
         Me.TransparencyKey = System.Drawing.Color.White
         Me.StatusStripRace.ResumeLayout(False)
@@ -273,11 +289,14 @@ Partial Class Race_Form
     Friend WithEvents progPlayer3 As System.Windows.Forms.ToolStripProgressBar
     Friend WithEvents lblPlayer4Name As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents progPlayer4 As System.Windows.Forms.ToolStripProgressBar
-    Friend WithEvents tmrRace As System.Windows.Forms.Timer
     Friend WithEvents cmdReset As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents gbRaceStats As System.Windows.Forms.GroupBox
     Friend WithEvents picFinishLine As System.Windows.Forms.PictureBox
-    Friend WithEvents tmrHealth As System.Windows.Forms.Timer
+    Friend WithEvents tmrRace As System.Windows.Forms.Timer
     Friend WithEvents DebugToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tmrPlayer1 As System.Windows.Forms.Timer
+    Friend WithEvents tmrPlayer2 As System.Windows.Forms.Timer
+    Friend WithEvents tmrPlayer3 As System.Windows.Forms.Timer
+    Friend WithEvents tmrPlayer4 As System.Windows.Forms.Timer
 
 End Class
