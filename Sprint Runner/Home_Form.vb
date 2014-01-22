@@ -112,7 +112,7 @@
 
             Catch ex As Exception
 
-                MsgBox("An Error Has Occured: " + ex.StackTrace.ToString())
+                MsgBox("An Error Has Occured: " + ex.ToString())
 
             End Try
 
