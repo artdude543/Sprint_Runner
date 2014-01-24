@@ -131,7 +131,7 @@
 
     Private Sub cmdClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdClose.Click
 
-        Application.Exit() ' Closes The Application
+        Call closeEvent() ' Closes The Application
 
     End Sub
 
@@ -161,6 +161,28 @@
             totalPlayers = 0
 
         End If
+
+    End Sub
+
+    Function closeEvent()
+
+        Dim closing As Boolean
+
+        closing = MsgBox("Do you wish to quit the game?", MsgBoxStyle.YesNo)
+
+        If (closing = True) Then
+
+            Application.Exit()
+
+        End If
+
+        Return ""
+
+    End Function
+
+    Private Sub Home_Form_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
+
+        Call closeEvent()
 
     End Sub
 

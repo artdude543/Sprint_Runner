@@ -84,26 +84,26 @@ Partial Class Home_Form
         '
         Me.cmdFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmdClose})
         Me.cmdFile.Name = "cmdFile"
-        Me.cmdFile.Size = New System.Drawing.Size(37, 20)
+        Me.cmdFile.Size = New System.Drawing.Size(35, 20)
         Me.cmdFile.Text = "File"
         '
         'cmdClose
         '
         Me.cmdClose.Name = "cmdClose"
-        Me.cmdClose.Size = New System.Drawing.Size(103, 22)
+        Me.cmdClose.Size = New System.Drawing.Size(111, 22)
         Me.cmdClose.Text = "Close"
         '
         'cmdHelp
         '
         Me.cmdHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmdAbout})
         Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.Size = New System.Drawing.Size(44, 20)
+        Me.cmdHelp.Size = New System.Drawing.Size(40, 20)
         Me.cmdHelp.Text = "Help"
         '
         'cmdAbout
         '
         Me.cmdAbout.Name = "cmdAbout"
-        Me.cmdAbout.Size = New System.Drawing.Size(107, 22)
+        Me.cmdAbout.Size = New System.Drawing.Size(114, 22)
         Me.cmdAbout.Text = "About"
         '
         'cmdPlay

@@ -35,11 +35,17 @@ Partial Class Race_Form
         Me.MenuStripRace = New System.Windows.Forms.MenuStrip()
         Me.cmdFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdClose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdStart = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdReset = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdAbout = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DebugToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdDebug = New System.Windows.Forms.ToolStripMenuItem()
         Me.gbRaceStats = New System.Windows.Forms.GroupBox()
+        Me.lblPlayer4Stats = New System.Windows.Forms.Label()
+        Me.lblPlayer3Stats = New System.Windows.Forms.Label()
+        Me.lblPlayer1Stats = New System.Windows.Forms.Label()
+        Me.lblPlayer2Stats = New System.Windows.Forms.Label()
+        Me.lblStatus = New System.Windows.Forms.Label()
         Me.picPlayer4 = New System.Windows.Forms.PictureBox()
         Me.picPlayer3 = New System.Windows.Forms.PictureBox()
         Me.picPlayer2 = New System.Windows.Forms.PictureBox()
@@ -51,8 +57,14 @@ Partial Class Race_Form
         Me.tmrPlayer4 = New System.Windows.Forms.Timer(Me.components)
         Me.tmrCPU3 = New System.Windows.Forms.Timer(Me.components)
         Me.tmrCPU4 = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrCountDown = New System.Windows.Forms.Timer(Me.components)
+        Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
+        Me.ovalRed = New Microsoft.VisualBasic.PowerPacks.OvalShape()
+        Me.ovalAmber = New Microsoft.VisualBasic.PowerPacks.OvalShape()
+        Me.ovalGreen = New Microsoft.VisualBasic.PowerPacks.OvalShape()
         Me.StatusStripRace.SuspendLayout()
         Me.MenuStripRace.SuspendLayout()
+        Me.gbRaceStats.SuspendLayout()
         CType(Me.picPlayer4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picPlayer3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picPlayer2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -114,7 +126,7 @@ Partial Class Race_Form
         '
         'MenuStripRace
         '
-        Me.MenuStripRace.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmdFile, Me.cmdReset, Me.cmdHelp, Me.DebugToolStripMenuItem})
+        Me.MenuStripRace.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmdFile, Me.cmdStart, Me.cmdReset, Me.cmdHelp, Me.cmdDebug})
         Me.MenuStripRace.Location = New System.Drawing.Point(0, 0)
         Me.MenuStripRace.Name = "MenuStripRace"
         Me.MenuStripRace.Size = New System.Drawing.Size(1038, 24)
@@ -133,6 +145,12 @@ Partial Class Race_Form
         Me.cmdClose.Name = "cmdClose"
         Me.cmdClose.Size = New System.Drawing.Size(111, 22)
         Me.cmdClose.Text = "Close"
+        '
+        'cmdStart
+        '
+        Me.cmdStart.Name = "cmdStart"
+        Me.cmdStart.Size = New System.Drawing.Size(73, 20)
+        Me.cmdStart.Text = "Start Game"
         '
         'cmdReset
         '
@@ -153,20 +171,71 @@ Partial Class Race_Form
         Me.cmdAbout.Size = New System.Drawing.Size(114, 22)
         Me.cmdAbout.Text = "About"
         '
-        'DebugToolStripMenuItem
+        'cmdDebug
         '
-        Me.DebugToolStripMenuItem.Name = "DebugToolStripMenuItem"
-        Me.DebugToolStripMenuItem.Size = New System.Drawing.Size(50, 20)
-        Me.DebugToolStripMenuItem.Text = "Debug"
+        Me.cmdDebug.Enabled = False
+        Me.cmdDebug.Name = "cmdDebug"
+        Me.cmdDebug.Size = New System.Drawing.Size(50, 20)
+        Me.cmdDebug.Text = "Debug"
         '
         'gbRaceStats
         '
+        Me.gbRaceStats.Controls.Add(Me.lblPlayer4Stats)
+        Me.gbRaceStats.Controls.Add(Me.lblPlayer3Stats)
+        Me.gbRaceStats.Controls.Add(Me.lblPlayer1Stats)
+        Me.gbRaceStats.Controls.Add(Me.lblPlayer2Stats)
+        Me.gbRaceStats.Controls.Add(Me.lblStatus)
         Me.gbRaceStats.Location = New System.Drawing.Point(760, 399)
         Me.gbRaceStats.Name = "gbRaceStats"
         Me.gbRaceStats.Size = New System.Drawing.Size(266, 103)
         Me.gbRaceStats.TabIndex = 6
         Me.gbRaceStats.TabStop = False
         Me.gbRaceStats.Text = "Race Stats"
+        '
+        'lblPlayer4Stats
+        '
+        Me.lblPlayer4Stats.AutoSize = True
+        Me.lblPlayer4Stats.Location = New System.Drawing.Point(121, 87)
+        Me.lblPlayer4Stats.Name = "lblPlayer4Stats"
+        Me.lblPlayer4Stats.Size = New System.Drawing.Size(48, 13)
+        Me.lblPlayer4Stats.TabIndex = 4
+        Me.lblPlayer4Stats.Text = "Player 4:"
+        '
+        'lblPlayer3Stats
+        '
+        Me.lblPlayer3Stats.AutoSize = True
+        Me.lblPlayer3Stats.Location = New System.Drawing.Point(121, 65)
+        Me.lblPlayer3Stats.Name = "lblPlayer3Stats"
+        Me.lblPlayer3Stats.Size = New System.Drawing.Size(48, 13)
+        Me.lblPlayer3Stats.TabIndex = 3
+        Me.lblPlayer3Stats.Text = "Player 2:"
+        '
+        'lblPlayer1Stats
+        '
+        Me.lblPlayer1Stats.AutoSize = True
+        Me.lblPlayer1Stats.Location = New System.Drawing.Point(6, 65)
+        Me.lblPlayer1Stats.Name = "lblPlayer1Stats"
+        Me.lblPlayer1Stats.Size = New System.Drawing.Size(48, 13)
+        Me.lblPlayer1Stats.TabIndex = 2
+        Me.lblPlayer1Stats.Text = "Player 1:"
+        '
+        'lblPlayer2Stats
+        '
+        Me.lblPlayer2Stats.AutoSize = True
+        Me.lblPlayer2Stats.Location = New System.Drawing.Point(6, 87)
+        Me.lblPlayer2Stats.Name = "lblPlayer2Stats"
+        Me.lblPlayer2Stats.Size = New System.Drawing.Size(48, 13)
+        Me.lblPlayer2Stats.TabIndex = 1
+        Me.lblPlayer2Stats.Text = "Player 3:"
+        '
+        'lblStatus
+        '
+        Me.lblStatus.AutoSize = True
+        Me.lblStatus.Location = New System.Drawing.Point(6, 16)
+        Me.lblStatus.Name = "lblStatus"
+        Me.lblStatus.Size = New System.Drawing.Size(126, 13)
+        Me.lblStatus.TabIndex = 0
+        Me.lblStatus.Text = "Race Status: Not Started"
         '
         'picPlayer4
         '
@@ -236,11 +305,62 @@ Partial Class Race_Form
         '
         'tmrCPU3
         '
-        Me.tmrCPU3.Interval = 30
+        Me.tmrCPU3.Interval = 16
         '
         'tmrCPU4
         '
-        Me.tmrCPU4.Interval = 30
+        Me.tmrCPU4.Interval = 16
+        '
+        'tmrCountDown
+        '
+        Me.tmrCountDown.Interval = 1000
+        '
+        'ShapeContainer1
+        '
+        Me.ShapeContainer1.Location = New System.Drawing.Point(0, 0)
+        Me.ShapeContainer1.Margin = New System.Windows.Forms.Padding(0)
+        Me.ShapeContainer1.Name = "ShapeContainer1"
+        Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.ovalGreen, Me.ovalAmber, Me.ovalRed})
+        Me.ShapeContainer1.Size = New System.Drawing.Size(1038, 527)
+        Me.ShapeContainer1.TabIndex = 8
+        Me.ShapeContainer1.TabStop = False
+        '
+        'ovalRed
+        '
+        Me.ovalRed.BackColor = System.Drawing.Color.Red
+        Me.ovalRed.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque
+        Me.ovalRed.BorderColor = System.Drawing.Color.Maroon
+        Me.ovalRed.FillColor = System.Drawing.Color.Maroon
+        Me.ovalRed.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Vertical
+        Me.ovalRed.Location = New System.Drawing.Point(543, 444)
+        Me.ovalRed.Name = "ovalRed"
+        Me.ovalRed.Size = New System.Drawing.Size(56, 52)
+        Me.ovalRed.Visible = False
+        '
+        'ovalAmber
+        '
+        Me.ovalAmber.BackColor = System.Drawing.Color.Gold
+        Me.ovalAmber.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque
+        Me.ovalAmber.BorderColor = System.Drawing.Color.Goldenrod
+        Me.ovalAmber.FillColor = System.Drawing.Color.Goldenrod
+        Me.ovalAmber.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Vertical
+        Me.ovalAmber.Location = New System.Drawing.Point(619, 444)
+        Me.ovalAmber.Name = "ovalAmber"
+        Me.ovalAmber.Size = New System.Drawing.Size(56, 52)
+        Me.ovalAmber.Visible = False
+        '
+        'ovalGreen
+        '
+        Me.ovalGreen.BackColor = System.Drawing.Color.Green
+        Me.ovalGreen.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque
+        Me.ovalGreen.BorderColor = System.Drawing.Color.LimeGreen
+        Me.ovalGreen.FillColor = System.Drawing.Color.LimeGreen
+        Me.ovalGreen.FillGradientColor = System.Drawing.SystemColors.Control
+        Me.ovalGreen.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Vertical
+        Me.ovalGreen.Location = New System.Drawing.Point(695, 444)
+        Me.ovalGreen.Name = "ovalGreen"
+        Me.ovalGreen.Size = New System.Drawing.Size(56, 52)
+        Me.ovalGreen.Visible = False
         '
         'Race_Form
         '
@@ -256,6 +376,7 @@ Partial Class Race_Form
         Me.Controls.Add(Me.StatusStripRace)
         Me.Controls.Add(Me.MenuStripRace)
         Me.Controls.Add(Me.picFinishLine)
+        Me.Controls.Add(Me.ShapeContainer1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.MainMenuStrip = Me.MenuStripRace
         Me.MaximizeBox = False
@@ -267,6 +388,8 @@ Partial Class Race_Form
         Me.StatusStripRace.PerformLayout()
         Me.MenuStripRace.ResumeLayout(False)
         Me.MenuStripRace.PerformLayout()
+        Me.gbRaceStats.ResumeLayout(False)
+        Me.gbRaceStats.PerformLayout()
         CType(Me.picPlayer4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picPlayer3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picPlayer2, System.ComponentModel.ISupportInitialize).EndInit()
@@ -297,12 +420,23 @@ Partial Class Race_Form
     Friend WithEvents cmdReset As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents gbRaceStats As System.Windows.Forms.GroupBox
     Friend WithEvents picFinishLine As System.Windows.Forms.PictureBox
-    Friend WithEvents DebugToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents cmdDebug As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tmrPlayer1 As System.Windows.Forms.Timer
     Friend WithEvents tmrPlayer2 As System.Windows.Forms.Timer
     Friend WithEvents tmrPlayer3 As System.Windows.Forms.Timer
     Friend WithEvents tmrPlayer4 As System.Windows.Forms.Timer
     Friend WithEvents tmrCPU3 As System.Windows.Forms.Timer
     Friend WithEvents tmrCPU4 As System.Windows.Forms.Timer
+    Friend WithEvents cmdStart As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents lblStatus As System.Windows.Forms.Label
+    Friend WithEvents tmrCountDown As System.Windows.Forms.Timer
+    Friend WithEvents lblPlayer2Stats As System.Windows.Forms.Label
+    Friend WithEvents lblPlayer4Stats As System.Windows.Forms.Label
+    Friend WithEvents lblPlayer3Stats As System.Windows.Forms.Label
+    Friend WithEvents lblPlayer1Stats As System.Windows.Forms.Label
+    Friend WithEvents ShapeContainer1 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
+    Friend WithEvents ovalGreen As Microsoft.VisualBasic.PowerPacks.OvalShape
+    Friend WithEvents ovalAmber As Microsoft.VisualBasic.PowerPacks.OvalShape
+    Friend WithEvents ovalRed As Microsoft.VisualBasic.PowerPacks.OvalShape
 
 End Class
