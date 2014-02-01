@@ -63,7 +63,7 @@
 
         ElseIf (CPUMode = True) Then
 
-            MsgBox("CPU Mode Not Added Yet!")
+            addNames()
 
         End If
 
@@ -123,7 +123,27 @@
 
             End If
 
-        ElseIf (CPUMode = True) Then
+        ElseIf (CPUMode = True And totalPlayers = 4) Then
+
+            Try
+
+                My.MySettings.Default.TotalPlayers = 4
+                My.MySettings.Default.Save()
+
+                success = True
+
+                If (success = True) Then
+
+                    Race_Form.Show()
+                    Me.Hide()
+
+                End If
+
+            Catch ex As Exception
+
+                MsgBox("An Error Has Occured: " + ex.ToString())
+
+            End Try
 
         End If
 
@@ -131,7 +151,8 @@
 
     Private Sub cmdClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdClose.Click
 
-        Call closeEvent() ' Closes The Application
+        ' Closes The Application
+        Application.Exit()
 
     End Sub
 
@@ -158,31 +179,15 @@
 
             CPUMode = True
             cmdPlay.Enabled = True
-            totalPlayers = 0
+            totalPlayers = 4
 
         End If
 
     End Sub
 
-    Function closeEvent()
-
-        Dim closing As Boolean
-
-        closing = MsgBox("Do you wish to quit the game?", MsgBoxStyle.YesNo)
-
-        If (closing = True) Then
-
-            Application.Exit()
-
-        End If
-
-        Return ""
-
-    End Function
-
     Private Sub Home_Form_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
 
-        Call closeEvent()
+        Application.Exit()
 
     End Sub
 

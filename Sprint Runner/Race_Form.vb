@@ -73,18 +73,16 @@
         playerHealthBars.Add(progPlayer3)
         playerHealthBars.Add(progPlayer4)
 
-        ' Picks Random Names For The CPU Players From The Array
-        Randomize()
-        player3Name = CPUNames.Item(Int(Rnd() * (CPUNames.Count - 1)))
-        player4Name = CPUNames.Item(Int(Rnd() * (CPUNames.Count - 2)))
-        ' If Single Player Mode (Pick Name For Player 2)
-        If (totalPlayers = 1) Then player2Name = CPUNames.Item(Int(Rnd() * (CPUNames.Count - 3)))
-
         ' Load Player Names + Game Settings
         If (totalPlayers = 1) Then
 
-            ' Load Player Names From Settings
+            ' Load/Set Player Names
             player1Name = My.MySettings.Default.Player1Name
+
+            Randomize()
+            player2Name = CPUNames.Item(Int(Rnd() * (CPUNames.Count - 3)))
+            player3Name = CPUNames.Item(Int(Rnd() * (CPUNames.Count - 1)))
+            player4Name = CPUNames.Item(Int(Rnd() * (CPUNames.Count - 2)))
 
             ' Set Player Names / Label Text
             lblPlayer1Name.Text = "Player 1: " + player1Name + " | Stamina:"
@@ -94,7 +92,7 @@
 
         ElseIf (totalPlayers = 2) Then
 
-            ' Load Player Names From Settings
+            ' Load/Set Player Names
             player1Name = My.MySettings.Default.Player1Name
             player2Name = My.MySettings.Default.Player2Name
 
@@ -104,9 +102,20 @@
             lblPlayer3Name.Text = "Player 3: " + player3Name + " | Stamina:"
             lblPlayer4Name.Text = "Player 4: " + player4Name + " | Stamina:"
 
-        ElseIf (CPUMode = True) Then
+        ElseIf (totalPlayers = 4) Then
 
-            ' Do Stuff
+            ' Load/Set Player Names
+            Randomize()
+            player1Name = CPUNames.Item(Int(Rnd() * (CPUNames.Count - 4)))
+            player2Name = CPUNames.Item(Int(Rnd() * (CPUNames.Count - 3)))
+            player3Name = CPUNames.Item(Int(Rnd() * (CPUNames.Count - 1)))
+            player4Name = CPUNames.Item(Int(Rnd() * (CPUNames.Count - 2)))
+
+            ' Set Player Names / Label Text
+            lblPlayer1Name.Text = "Player 1: " + player1Name + " | Stamina:"
+            lblPlayer2Name.Text = "Player 2: " + player2Name + " | Stamina:"
+            lblPlayer3Name.Text = "Player 3: " + player3Name + " | Stamina:"
+            lblPlayer4Name.Text = "Player 4: " + player4Name + " | Stamina:"
 
         End If
 
@@ -209,6 +218,30 @@
                 lblPlayer3Stats.Text = player3Name.ToString() + " : Ready!"
                 lblPlayer4Stats.Text = player4Name.ToString() + " : Ready!"
 
+            ElseIf (totalPlayers = 4) Then
+
+                ' Sets The Player Status To Allow Them To Go
+                player1Go = True
+                player2Go = True
+                player3Go = True
+                player4Go = True
+
+                ' Enable Players
+                tmrCPU1.Enabled = True
+                tmrCPU1.Start()
+                tmrCPU2.Enabled = True
+                tmrCPU2.Start()
+                tmrCPU3.Enabled = True
+                tmrCPU3.Start()
+                tmrCPU4.Enabled = True
+                tmrCPU4.Start()
+
+                ' Set Player Stats Text
+                lblPlayer1Stats.Text = player1Name.ToString() + " : Ready!"
+                lblPlayer2Stats.Text = player2Name.ToString() + " : Ready!"
+                lblPlayer3Stats.Text = player3Name.ToString() + " : Ready!"
+                lblPlayer4Stats.Text = player4Name.ToString() + " : Ready!"
+
             End If
 
         End If
@@ -269,6 +302,15 @@
 
             End If
 
+        ElseIf (totalPlaying = 4 And player1Finish = True And player2Finish = True And player3Finish = True And player4Finish = True) Then
+
+            ' Stops The Timers And Shows The Result Form As Dialog
+            tmrCPU1.Stop()
+            tmrCPU2.Stop()
+            tmrCPU3.Stop()
+            tmrCPU4.Stop()
+            Results_Form.ShowDialog()
+
         End If
 
     End Sub
@@ -276,6 +318,130 @@
 #End Region
 
 #Region "CPU Player - Timer"
+
+    Private Sub tmrCPU1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrCPU1.Tick
+
+        Dim CPU As Integer
+        Dim CPULOW As Integer
+
+        ' Randomizes And Select The Player Movements
+        Randomize()
+        CPU = Int(Rnd() * 6) + 1
+        CPULOW = Int(Rnd() * 2) + 1
+
+        ' Goes Through The Health And At Differant Stages Slows The Player Down, Also When The Health Reaches A Low Point Then Starts The Timer For Re-Healing
+        If (player1Health = 0) Then
+
+            ' Disables Player Movement And Enable The Re-Healing Timer
+            player1Go = False
+            player1Healing = True
+            lblPlayer1Stats.Text = player1Name.ToString() + " : Healing..."
+
+            tmrPlayer1.Enabled = True
+            tmrPlayer1.Start()
+
+        ElseIf (picPlayer1.Left >= 960 And player1Finish = False) Then
+
+            ' Disables Player Movement If Player Finishes Then Adds The Player Finish To The Scoreboard
+            player1Finish = True
+            player1Go = False
+
+            tmrCPU1.Stop()
+            tmrCPU1.Enabled = False
+
+            Results_Form.lstPlayersFinished.Items.Add(player1Name + " - " + finishedPosition.ToString())
+            finishedPosition = finishedPosition + 1
+
+            ' Call Function To Check If Players Have Finished
+            Call checkFinished(totalPlayers)
+
+        Else
+
+            If player1Go = True And player1Healing = False And player1Finish = False Then
+
+                ' Moves The Player Along The Track At Random Intervals
+                If (player1Health > 50) Then
+
+                    picPlayer1.Left = picPlayer1.Left + CPU
+
+                Else
+
+                    picPlayer1.Left = picPlayer1.Left + CPULOW
+
+                End If
+
+                Dim healthLevel As Double
+                healthLevel = player1Health - 2
+                progPlayer1.Value = Int(healthLevel)
+                player1Health = healthLevel
+
+            End If
+
+        End If
+
+    End Sub
+
+    Private Sub tmrCPU2_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrCPU2.Tick
+
+        Dim CPU As Integer
+        Dim CPULOW As Integer
+
+        ' Randomizes And Select The Player Movements
+        Randomize()
+        CPU = Int(Rnd() * 6) + 1
+        CPULOW = Int(Rnd() * 2) + 1
+
+        ' Goes Through The Health And At Differant Stages Slows The Player Down, Also When The Health Reaches A Low Point Then Starts The Timer For Re-Healing
+        If (player2Health = 0) Then
+
+            ' Disables Player Movement And Enable The Re-Healing Timer
+            player2Go = False
+            player2Healing = True
+            lblPlayer2Stats.Text = player2Name.ToString() + " : Healing..."
+
+            tmrPlayer2.Enabled = True
+            tmrPlayer2.Start()
+
+        ElseIf (picPlayer2.Left >= 960 And player2Finish = False) Then
+
+            ' Disables Player Movement If Player Finishes Then Adds The Player Finish To The Scoreboard
+            player2Finish = True
+            player2Go = False
+
+            tmrCPU2.Stop()
+            tmrCPU2.Enabled = False
+
+            Results_Form.lstPlayersFinished.Items.Add(player2Name + " - " + finishedPosition.ToString())
+            finishedPosition = finishedPosition + 1
+
+            ' Call Function To Check If Players Have Finished
+            Call checkFinished(totalPlayers)
+
+        Else
+
+            If player2Go = True And player2Healing = False And player2Finish = False Then
+
+                ' Moves The Player Along The Track At Random Intervals
+                If (player2Health > 50) Then
+
+                    picPlayer2.Left = picPlayer2.Left + CPU
+
+                Else
+
+                    picPlayer2.Left = picPlayer2.Left + CPULOW
+
+                End If
+
+                Dim healthLevel As Double
+                healthLevel = player2Health - 2
+                progPlayer2.Value = Int(healthLevel)
+                player2Health = healthLevel
+
+            End If
+
+        End If
+
+    End Sub
 
     Private Sub tmrCPU3_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrCPU3.Tick
 
@@ -644,8 +810,7 @@
 
     Private Sub cmdClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdClose.Click
 
-        ' Closes The Application
-        Application.Exit()
+        Close()
 
     End Sub
 
@@ -653,16 +818,27 @@
 
         Dim notifed As Boolean
 
-        notifed = MsgBox("Warning! This Restarts The Game, All Progress Will Be Lost", MsgBoxStyle.OkOnly)
+        notifed = MsgBox("Warning! This Restarts The Game, All Progress Will Be Lost", MsgBoxStyle.YesNo)
 
-        Application.Restart()
+        If (notifed = True) Then
+
+            Application.Restart()
+
+        End If
 
     End Sub
 
     Private Sub Race_Form_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
 
-        ' Closes The Application
-        Application.Exit()
+        Dim notifed As Boolean
+
+        notifed = MsgBox("Are you sure you want to quit?", MsgBoxStyle.YesNo)
+
+        If (notifed = True) Then
+
+            Application.Exit()
+
+        End If
 
     End Sub
 

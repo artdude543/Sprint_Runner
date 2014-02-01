@@ -119,7 +119,7 @@ Partial Class Home_Form
         'cmbPlayerCount
         '
         Me.cmbPlayerCount.FormattingEnabled = True
-        Me.cmbPlayerCount.Items.AddRange(New Object() {"1 (Single)", "2 (Multiplayer)", "3 (CPU Only)"})
+        Me.cmbPlayerCount.Items.AddRange(New Object() {"1 (Single)", "2 (Multiplayer)", "CPU Mode"})
         Me.cmbPlayerCount.Location = New System.Drawing.Point(97, 72)
         Me.cmbPlayerCount.Name = "cmbPlayerCount"
         Me.cmbPlayerCount.Size = New System.Drawing.Size(100, 21)
@@ -138,6 +138,7 @@ Partial Class Home_Form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(302, 183)
         Me.Controls.Add(Me.lblPlayerCount)
         Me.Controls.Add(Me.cmbPlayerCount)
@@ -147,7 +148,9 @@ Partial Class Home_Form
         Me.Controls.Add(Me.txtP2Name)
         Me.Controls.Add(Me.txtP1Name)
         Me.Controls.Add(Me.MenuHome)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MainMenuStrip = Me.MenuHome
+        Me.MaximizeBox = False
         Me.Name = "Home_Form"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = " Sprint Runner | Home"

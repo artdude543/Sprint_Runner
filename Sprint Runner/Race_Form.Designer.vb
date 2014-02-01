@@ -59,9 +59,11 @@ Partial Class Race_Form
         Me.tmrCPU4 = New System.Windows.Forms.Timer(Me.components)
         Me.tmrCountDown = New System.Windows.Forms.Timer(Me.components)
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
-        Me.ovalRed = New Microsoft.VisualBasic.PowerPacks.OvalShape()
-        Me.ovalAmber = New Microsoft.VisualBasic.PowerPacks.OvalShape()
         Me.ovalGreen = New Microsoft.VisualBasic.PowerPacks.OvalShape()
+        Me.ovalAmber = New Microsoft.VisualBasic.PowerPacks.OvalShape()
+        Me.ovalRed = New Microsoft.VisualBasic.PowerPacks.OvalShape()
+        Me.tmrCPU1 = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrCPU2 = New System.Windows.Forms.Timer(Me.components)
         Me.StatusStripRace.SuspendLayout()
         Me.MenuStripRace.SuspendLayout()
         Me.gbRaceStats.SuspendLayout()
@@ -325,17 +327,18 @@ Partial Class Race_Form
         Me.ShapeContainer1.TabIndex = 8
         Me.ShapeContainer1.TabStop = False
         '
-        'ovalRed
+        'ovalGreen
         '
-        Me.ovalRed.BackColor = System.Drawing.Color.Red
-        Me.ovalRed.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque
-        Me.ovalRed.BorderColor = System.Drawing.Color.Maroon
-        Me.ovalRed.FillColor = System.Drawing.Color.Maroon
-        Me.ovalRed.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Vertical
-        Me.ovalRed.Location = New System.Drawing.Point(543, 444)
-        Me.ovalRed.Name = "ovalRed"
-        Me.ovalRed.Size = New System.Drawing.Size(56, 52)
-        Me.ovalRed.Visible = False
+        Me.ovalGreen.BackColor = System.Drawing.Color.Green
+        Me.ovalGreen.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque
+        Me.ovalGreen.BorderColor = System.Drawing.Color.LimeGreen
+        Me.ovalGreen.FillColor = System.Drawing.Color.LimeGreen
+        Me.ovalGreen.FillGradientColor = System.Drawing.SystemColors.Control
+        Me.ovalGreen.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Vertical
+        Me.ovalGreen.Location = New System.Drawing.Point(695, 444)
+        Me.ovalGreen.Name = "ovalGreen"
+        Me.ovalGreen.Size = New System.Drawing.Size(56, 52)
+        Me.ovalGreen.Visible = False
         '
         'ovalAmber
         '
@@ -349,18 +352,25 @@ Partial Class Race_Form
         Me.ovalAmber.Size = New System.Drawing.Size(56, 52)
         Me.ovalAmber.Visible = False
         '
-        'ovalGreen
+        'ovalRed
         '
-        Me.ovalGreen.BackColor = System.Drawing.Color.Green
-        Me.ovalGreen.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque
-        Me.ovalGreen.BorderColor = System.Drawing.Color.LimeGreen
-        Me.ovalGreen.FillColor = System.Drawing.Color.LimeGreen
-        Me.ovalGreen.FillGradientColor = System.Drawing.SystemColors.Control
-        Me.ovalGreen.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Vertical
-        Me.ovalGreen.Location = New System.Drawing.Point(695, 444)
-        Me.ovalGreen.Name = "ovalGreen"
-        Me.ovalGreen.Size = New System.Drawing.Size(56, 52)
-        Me.ovalGreen.Visible = False
+        Me.ovalRed.BackColor = System.Drawing.Color.Red
+        Me.ovalRed.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque
+        Me.ovalRed.BorderColor = System.Drawing.Color.Maroon
+        Me.ovalRed.FillColor = System.Drawing.Color.Maroon
+        Me.ovalRed.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Vertical
+        Me.ovalRed.Location = New System.Drawing.Point(543, 444)
+        Me.ovalRed.Name = "ovalRed"
+        Me.ovalRed.Size = New System.Drawing.Size(56, 52)
+        Me.ovalRed.Visible = False
+        '
+        'tmrCPU1
+        '
+        Me.tmrCPU1.Interval = 16
+        '
+        'tmrCPU2
+        '
+        Me.tmrCPU2.Interval = 16
         '
         'Race_Form
         '
@@ -438,5 +448,7 @@ Partial Class Race_Form
     Friend WithEvents ovalGreen As Microsoft.VisualBasic.PowerPacks.OvalShape
     Friend WithEvents ovalAmber As Microsoft.VisualBasic.PowerPacks.OvalShape
     Friend WithEvents ovalRed As Microsoft.VisualBasic.PowerPacks.OvalShape
+    Friend WithEvents tmrCPU1 As System.Windows.Forms.Timer
+    Friend WithEvents tmrCPU2 As System.Windows.Forms.Timer
 
 End Class
