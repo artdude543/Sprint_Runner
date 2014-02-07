@@ -31,7 +31,19 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Sprint_Runner.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MetroFramework">
+      <HintPath>..\..\..\Programming\Libraries\MetroFramework\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design">
+      <HintPath>..\..\..\Programming\Libraries\MetroFramework\MetroFramework.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts">
+      <HintPath>..\..\..\Programming\Libraries\MetroFramework\MetroFramework.Fonts.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,14 +56,46 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Home_Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Home_Main.Designer.cs">
+      <DependentUpon>Home_Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Information.cs" />
+    <Compile Include="Profile_Create.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Profile_Create.Designer.cs">
+      <DependentUpon>Profile_Create.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Profile_Edit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Profile_Edit.Designer.cs">
+      <DependentUpon>Profile_Edit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Profile_Select.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Profile_Select.Designer.cs">
+      <DependentUpon>Profile_Select.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Save_Profile_Data.cs" />
+    <EmbeddedResource Include="Home_Main.resx">
+      <DependentUpon>Home_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Profile_Create.resx">
+      <DependentUpon>Profile_Create.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Profile_Edit.resx">
+      <DependentUpon>Profile_Edit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Profile_Select.resx">
+      <DependentUpon>Profile_Select.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

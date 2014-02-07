@@ -1,6 +1,6 @@
 ﻿namespace Sprint_Runner
 {
-    partial class Form1
+    partial class Profile_Select
     {
         /// <summary>
         /// Required designer variable.
@@ -28,12 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.SuspendLayout();
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(62, 96);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 0;
+            // 
+            // Profile_Select
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(300, 300);
+            this.Controls.Add(this.comboBox1);
+            this.Name = "Profile_Select";
+            this.Text = "Profile_Select";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
-
