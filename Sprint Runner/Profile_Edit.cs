@@ -17,7 +17,7 @@ namespace Sprint_Runner
     public partial class Profile_Edit : MetroForm
     {
         string ProfilesDirectory = "profiles/";
-        string PlayerProfileName = "";
+        string ProfileName = Properties.Settings.Default.ProfileName + ".xml";
 
         public Profile_Edit()
         {
@@ -26,14 +26,38 @@ namespace Sprint_Runner
 
         private void Profile_Edit_Load(object sender, EventArgs e)
         {
-            if (File.Exists(ProfilesDirectory + "artdude543.xml"))
+            if (File.Exists(ProfilesDirectory + ProfileName))
             {
                 XmlSerializer xs = new XmlSerializer(typeof(Save_Profile_Information));
-                FileStream read = new FileStream(ProfilesDirectory + "artdude543.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
+                FileStream read = new FileStream(ProfilesDirectory + ProfileName, FileMode.Open, FileAccess.Read, FileShare.Read);
                 Save_Profile_Information info = (Save_Profile_Information)xs.Deserialize(read);
 
                 /* Load Player Information */
-                txtPlayerName.Text = info.ProfileName;
+                txtProfileName.Text = info.ProfileName;
+
+                /* Load Player Avatar (Need to find a better way of doing this) */
+                cmbAvatar.Text = info.ProfileAvatar;
+                if (cmbAvatar.Text == "Mario")
+                {
+                    picAvatarPreview.Image = Properties.Resources.Mario;
+                }
+                else if (cmbAvatar.Text == "Mushroom")
+                {
+                    picAvatarPreview.Image = Properties.Resources.Mushroom;
+                }
+                else if (cmbAvatar.Text == "Mushroom 1UP")
+                {
+                    picAvatarPreview.Image = Properties.Resources.Mushroom_1UP;
+                }
+                else if (cmbAvatar.Text == "Mushroom Super")
+                {
+                    picAvatarPreview.Image = Properties.Resources.Mushroom_Super;
+                }
+                else if (cmbAvatar.Text == "Block Question")
+                {
+                    picAvatarPreview.Image = Properties.Resources.Block_Question;
+                }
+                cmbDifficulty.Text = info.Difficulty;
             }
         }
     }

@@ -15,12 +15,16 @@ namespace Sprint_Runner
 {
     public partial class Profile_Select : MetroForm
     {
+        private readonly Home_Main _Home_Main;
+
         string profilesDirectory = "profiles/";
         string selectedProfile = "";
 
-        public Profile_Select()
+        public Profile_Select(Home_Main HomeMain)
         {
             InitializeComponent();
+            this._Home_Main = HomeMain;
+
             loadProfiles();
         }
 
@@ -35,8 +39,6 @@ namespace Sprint_Runner
             }
         }
 
-        #region Button Functions
-
         private void cmdProfiles_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.Text = "Select Profile | " + cmdProfiles.Text;
@@ -46,9 +48,35 @@ namespace Sprint_Runner
 
         private void cmdSelect_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("You have selected - " + selectedProfile + "'s profile");
-        }
+            if (cmdProfiles.Text == "")
+            {
+                DialogResult noProfile = MessageBox.Show("You have not selected a profile! Do you wish to select one now?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-        #endregion
+                if (noProfile == DialogResult.Yes)
+                {
+                    cmdProfiles.Focus();
+                }
+                else
+                {
+                    Properties.Settings.Default.ProfileSet = false;
+                    Properties.Settings.Default.ProfileName = "";
+                    Properties.Settings.Default.Save();
+
+                    this._Home_Main.reloadProfile();
+                    this.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("You have selected - " + selectedProfile + "'s profile");
+
+                Properties.Settings.Default.ProfileName = selectedProfile;
+                Properties.Settings.Default.ProfileSet = true;
+                Properties.Settings.Default.Save();
+
+                this._Home_Main.reloadProfile();
+                this.Close();
+            }
+        }
     }
 }

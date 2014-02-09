@@ -10,6 +10,7 @@ namespace Sprint_Runner
     {
 
         private string profileName;
+        private string profileAvatar;
         private string difficulty;
         private int totalScore; 
         private int totalWins;
@@ -18,6 +19,12 @@ namespace Sprint_Runner
         {
             get { return profileName; }
             set { profileName = value; }
+        }
+
+        public string ProfileAvatar
+        {
+            get { return profileAvatar; }
+            set { profileAvatar = value; }
         }
 
         public string Difficulty

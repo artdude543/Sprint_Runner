@@ -54,7 +54,7 @@
             // cmdSelect
             // 
             this.cmdSelect.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.cmdSelect.Location = new System.Drawing.Point(23, 270);
+            this.cmdSelect.Location = new System.Drawing.Point(23, 144);
             this.cmdSelect.Name = "cmdSelect";
             this.cmdSelect.Size = new System.Drawing.Size(75, 23);
             this.cmdSelect.TabIndex = 2;
@@ -67,7 +67,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
-            this.ClientSize = new System.Drawing.Size(336, 316);
+            this.ClientSize = new System.Drawing.Size(336, 199);
             this.Controls.Add(this.cmdSelect);
             this.Controls.Add(this.lblSelectProfile);
             this.Controls.Add(this.cmdProfiles);
@@ -80,7 +80,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Silver;
             this.Text = "Select Profile |";
-            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
 
