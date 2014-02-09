@@ -68,7 +68,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
-            this.ClientSize = new System.Drawing.Size(416, 331);
+            this.ClientSize = new System.Drawing.Size(366, 336);
             this.Controls.Add(this.cmdProfileSelect);
             this.Controls.Add(this.cmdProfileEdit);
             this.Controls.Add(this.cmdTemp);

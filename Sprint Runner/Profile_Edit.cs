@@ -28,12 +28,12 @@ namespace Sprint_Runner
         {
             if (File.Exists(ProfilesDirectory + "artdude543.xml"))
             {
-                XmlSerializer xs = new XmlSerializer(typeof(Information));
+                XmlSerializer xs = new XmlSerializer(typeof(Save_Profile_Information));
                 FileStream read = new FileStream(ProfilesDirectory + "artdude543.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
-                Information info = (Information)xs.Deserialize(read);
+                Save_Profile_Information info = (Save_Profile_Information)xs.Deserialize(read);
 
                 /* Load Player Information */
-                txtPlayerName.Text = info.PlayerName;
+                txtPlayerName.Text = info.ProfileName;
             }
         }
     }

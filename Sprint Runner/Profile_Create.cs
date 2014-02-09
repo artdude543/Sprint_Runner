@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroFramework.Forms;
 using MetroFramework.Controls;
+using System.IO;
 
 namespace Sprint_Runner
 {
@@ -25,10 +26,20 @@ namespace Sprint_Runner
         {
             try
             {
-                Information info = new Information();
-                info.PlayerName = txtPlayerName.Text;
+                if (File.Exists(ProfilesDirectory + txtProfileName.Text + ".xml"))
+                {
+                    MessageBox.Show("Profile Save Already Exists! Please Choose Another Name.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    Save_Profile_Information info = new Save_Profile_Information();
+                    info.ProfileName = txtProfileName.Text;
+                    info.Difficulty = cmbDifficulty.Text;
+                    info.TotalScore = 0;
+                    info.TotalWins = 0;
 
-                Save_Profile_Data.SaveData(info, ProfilesDirectory + txtPlayerName.Text + ".xml");
+                    Save_Profile_Data.SaveData(info, ProfilesDirectory, txtProfileName.Text + ".xml");
+                }
             }
             catch (Exception ex)
             {

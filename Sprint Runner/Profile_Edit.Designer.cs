@@ -43,10 +43,19 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(300, 300);
+            this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
+            this.ClientSize = new System.Drawing.Size(336, 316);
             this.Controls.Add(this.txtPlayerName);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Movable = false;
             this.Name = "Profile_Edit";
-            this.Text = "Profile_Edit";
+            this.Resizable = false;
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.DropShadow;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Style = MetroFramework.MetroColorStyle.Silver;
+            this.Text = "Profile Edit |";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.Profile_Edit_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

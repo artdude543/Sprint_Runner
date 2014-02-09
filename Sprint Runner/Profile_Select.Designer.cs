@@ -28,31 +28,68 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmdProfiles = new System.Windows.Forms.ComboBox();
+            this.lblSelectProfile = new MetroFramework.Controls.MetroLabel();
+            this.cmdSelect = new MetroFramework.Controls.MetroButton();
             this.SuspendLayout();
             // 
-            // comboBox1
+            // cmdProfiles
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(62, 96);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 0;
+            this.cmdProfiles.FormattingEnabled = true;
+            this.cmdProfiles.Location = new System.Drawing.Point(148, 83);
+            this.cmdProfiles.Name = "cmdProfiles";
+            this.cmdProfiles.Size = new System.Drawing.Size(121, 21);
+            this.cmdProfiles.TabIndex = 0;
+            this.cmdProfiles.SelectedIndexChanged += new System.EventHandler(this.cmdProfiles_SelectedIndexChanged);
+            // 
+            // lblSelectProfile
+            // 
+            this.lblSelectProfile.AutoSize = true;
+            this.lblSelectProfile.Location = new System.Drawing.Point(23, 83);
+            this.lblSelectProfile.Name = "lblSelectProfile";
+            this.lblSelectProfile.Size = new System.Drawing.Size(119, 19);
+            this.lblSelectProfile.TabIndex = 1;
+            this.lblSelectProfile.Text = "Select Your Profile:";
+            // 
+            // cmdSelect
+            // 
+            this.cmdSelect.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.cmdSelect.Location = new System.Drawing.Point(23, 270);
+            this.cmdSelect.Name = "cmdSelect";
+            this.cmdSelect.Size = new System.Drawing.Size(75, 23);
+            this.cmdSelect.TabIndex = 2;
+            this.cmdSelect.Text = "Select Profile";
+            this.cmdSelect.UseSelectable = true;
+            this.cmdSelect.Click += new System.EventHandler(this.cmdSelect_Click);
             // 
             // Profile_Select
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(300, 300);
-            this.Controls.Add(this.comboBox1);
+            this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
+            this.ClientSize = new System.Drawing.Size(336, 316);
+            this.Controls.Add(this.cmdSelect);
+            this.Controls.Add(this.lblSelectProfile);
+            this.Controls.Add(this.cmdProfiles);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Movable = false;
             this.Name = "Profile_Select";
-            this.Text = "Profile_Select";
+            this.Resizable = false;
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.DropShadow;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Style = MetroFramework.MetroColorStyle.Silver;
+            this.Text = "Select Profile |";
+            this.TopMost = true;
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmdProfiles;
+        private MetroFramework.Controls.MetroLabel lblSelectProfile;
+        private MetroFramework.Controls.MetroButton cmdSelect;
     }
 }
