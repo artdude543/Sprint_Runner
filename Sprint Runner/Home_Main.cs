@@ -9,13 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroFramework.Forms;
 using MetroFramework.Controls;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace Sprint_Runner
 {
     public partial class Home_Main : MetroForm
     {
-        string ProfileName = Properties.Settings.Default.ProfileName;
-        bool ProfileSet = Properties.Settings.Default.ProfileSet;
+        string SettingsDirectory = "settings/";
+        string SettingsFileName = "settings.xml";
+        string ProfilesName;
 
         public Home_Main()
         {
@@ -25,29 +28,40 @@ namespace Sprint_Runner
         }
         public void loadSettings()
         {
-            lblCurrentProfile.Text = lblCurrentProfile.Text + " " + ProfileName;
-            if (ProfileSet)
+            if (!Directory.Exists(SettingsDirectory))
             {
-                cmdProfileEdit.Enabled = true;
+                Directory.CreateDirectory(SettingsDirectory);
+            }
+            if (File.Exists(SettingsDirectory + SettingsFileName))
+            {
+                /* Settings Data Loading */
+                XmlSerializer xs = new XmlSerializer(typeof(Save_Information_Settings));
+                FileStream read = new FileStream(SettingsDirectory + SettingsFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+                Save_Information_Settings info = (Save_Information_Settings)xs.Deserialize(read);
+                ProfilesName = info.SelectedProfile;
+                read.Close();
+
+                lblCurrentProfile.Text = "Current Profile: " + ProfilesName;
+                this.Refresh();
             }
             else
             {
-                cmdProfileEdit.Enabled = false;
+                /* Create New Settings File */
+                Save_Information_Settings settings = new Save_Information_Settings();
+                settings.SelectedProfile = "";
+                Save_Data.SaveData(settings, SettingsDirectory, SettingsFileName);
             }
         }
         public void reloadProfile()
         {
-            ProfileName = Properties.Settings.Default.ProfileName;
-            ProfileSet = Properties.Settings.Default.ProfileSet;
-            lblCurrentProfile.Text = "Current Profile: " + ProfileName;
-            if (ProfileSet)
-            {
-                cmdProfileEdit.Enabled = true;
-            }
-            else
-            {
-                cmdProfileEdit.Enabled = false;
-            }
+            /* Settings Data Loading */
+            XmlSerializer xs = new XmlSerializer(typeof(Save_Information_Settings));
+            FileStream read = new FileStream(SettingsDirectory + SettingsFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+            Save_Information_Settings info = (Save_Information_Settings)xs.Deserialize(read);
+            ProfilesName = info.SelectedProfile;
+            read.Close();
+
+            lblCurrentProfile.Text = "Current Profile: " + ProfilesName;
             this.Refresh();
         }
 

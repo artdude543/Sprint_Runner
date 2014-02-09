@@ -17,6 +17,9 @@ namespace Sprint_Runner
     {
         private readonly Home_Main _Home_Main;
 
+        string SettingsDirectory = "settings/";
+        string SettingsFileName = "settings.xml";
+
         string profilesDirectory = "profiles/";
         string selectedProfile = "";
 
@@ -58,9 +61,10 @@ namespace Sprint_Runner
                 }
                 else
                 {
-                    Properties.Settings.Default.ProfileSet = false;
-                    Properties.Settings.Default.ProfileName = "";
-                    Properties.Settings.Default.Save();
+                    /* Create New Settings File (Using False Data) */
+                    Save_Information_Settings settings = new Save_Information_Settings();
+                    settings.SelectedProfile = "";
+                    Save_Data.SaveData(settings, SettingsDirectory, SettingsFileName);
 
                     this._Home_Main.reloadProfile();
                     this.Close();
@@ -70,9 +74,10 @@ namespace Sprint_Runner
             {
                 MessageBox.Show("You have selected - " + selectedProfile + "'s profile");
 
-                Properties.Settings.Default.ProfileName = selectedProfile;
-                Properties.Settings.Default.ProfileSet = true;
-                Properties.Settings.Default.Save();
+                /* Settings Data Saving */
+                Save_Information_Settings settings = new Save_Information_Settings();
+                settings.SelectedProfile = selectedProfile;
+                Save_Data.SaveData(settings, SettingsDirectory, SettingsFileName);
 
                 this._Home_Main.reloadProfile();
                 this.Close();

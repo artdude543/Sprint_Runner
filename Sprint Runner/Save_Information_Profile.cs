@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 
 namespace Sprint_Runner
 {
-    public class Save_Profile_Information
+    public class Save_Information_Profile
     {
-
+        /* Profile/Player Settings */
         private string profileName;
         private string profileAvatar;
         private string difficulty;
         private int totalScore; 
         private int totalWins;
+
+        /* Application Settings */
+        private string selectedProfile;
 
         public string ProfileName
         {
@@ -43,6 +46,12 @@ namespace Sprint_Runner
         {
             get { return totalWins; }
             set { totalWins = value; }
+        }
+
+        public string SelectedProfile
+        {
+            get { return selectedProfile; }
+            set { selectedProfile = value; }
         }
     }
 }

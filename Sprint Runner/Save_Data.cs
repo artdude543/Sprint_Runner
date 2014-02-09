@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace Sprint_Runner
 {
-    public class Save_Profile_Data
+    public class Save_Data
     {
         public static void SaveData(object obj, string directory, string filename)
         {

@@ -46,7 +46,6 @@
             // 
             // cmdProfileEdit
             // 
-            this.cmdProfileEdit.Enabled = false;
             this.cmdProfileEdit.Location = new System.Drawing.Point(223, 286);
             this.cmdProfileEdit.Name = "cmdProfileEdit";
             this.cmdProfileEdit.Size = new System.Drawing.Size(120, 23);

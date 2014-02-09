@@ -17,6 +17,9 @@ namespace Sprint_Runner
     {
         private readonly Home_Main _Home_Main;
 
+        string SettingsDirectory = "settings/";
+        string SettingsFileName = "settings.xml";
+
         string profilesDirectory = "profiles/";
         bool error = false;
         string errorMessage = "";
@@ -79,21 +82,25 @@ namespace Sprint_Runner
                     }
                     else
                     {
-                        Save_Profile_Information info = new Save_Profile_Information();
-
+                        if (!Directory.Exists(profilesDirectory))
+                        {
+                            Directory.CreateDirectory(profilesDirectory);
+                        }
+                        /* Profile Data Saving */
+                        Save_Information_Profile info = new Save_Information_Profile();
                         info.ProfileName = txtProfileName.Text;
                         info.ProfileAvatar = cmbAvatar.Text;
                         info.Difficulty = cmbDifficulty.Text;
                         info.TotalScore = 0;
                         info.TotalWins = 0;
+                        Save_Data.SaveData(info, profilesDirectory, txtProfileName.Text + ".xml");
 
-                        Save_Profile_Data.SaveData(info, profilesDirectory, txtProfileName.Text + ".xml");
+                        /* Settings Data Saving */
+                        Save_Information_Settings settings = new Save_Information_Settings();
+                        settings.SelectedProfile = txtProfileName.Text;
+                        Save_Data.SaveData(settings, SettingsDirectory, SettingsFileName);
 
-                        /* Set Current Profile As The New Profile Created */
-                        Properties.Settings.Default.ProfileName = txtProfileName.Text;
-                        Properties.Settings.Default.ProfileSet = true;
-                        Properties.Settings.Default.Save();
-
+                        /* Reload Home Form Values */
                         _Home_Main.reloadProfile();
                         this.Close();
                     }

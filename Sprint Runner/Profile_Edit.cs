@@ -16,21 +16,49 @@ namespace Sprint_Runner
 {
     public partial class Profile_Edit : MetroForm
     {
+        string SettingsDirectory = "settings/";
+        string SettingsFileName = "settings.xml";
+
         string ProfilesDirectory = "profiles/";
-        string ProfileName = Properties.Settings.Default.ProfileName + ".xml";
+        string SelectedProfile = "";
 
         public Profile_Edit()
         {
             InitializeComponent();
+
+            loadSettings();
         }
 
         private void Profile_Edit_Load(object sender, EventArgs e)
         {
-            if (File.Exists(ProfilesDirectory + ProfileName))
+
+        }
+
+        private void loadSettings()
+        {
+            /* Settings Data Loading */
+            XmlSerializer xs = new XmlSerializer(typeof(Save_Information_Settings));
+            FileStream read = new FileStream(SettingsDirectory + SettingsFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+            Save_Information_Settings info = (Save_Information_Settings)xs.Deserialize(read);
+            SelectedProfile = info.SelectedProfile;
+            read.Close();
+            if (SelectedProfile == "")
             {
-                XmlSerializer xs = new XmlSerializer(typeof(Save_Profile_Information));
-                FileStream read = new FileStream(ProfilesDirectory + ProfileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-                Save_Profile_Information info = (Save_Profile_Information)xs.Deserialize(read);
+                MessageBox.Show("No Profile Selected!");
+            }
+            else
+            {
+                loadProfileData();
+            }
+        }
+
+        private void loadProfileData()
+        {
+            if (File.Exists(ProfilesDirectory + SelectedProfile + ".xml"))
+            {
+                XmlSerializer xs = new XmlSerializer(typeof(Save_Information_Profile));
+                FileStream read = new FileStream(ProfilesDirectory + SelectedProfile + ".xml", FileMode.Open, FileAccess.Read, FileShare.Read);
+                Save_Information_Profile info = (Save_Information_Profile)xs.Deserialize(read);
 
                 /* Load Player Information */
                 txtProfileName.Text = info.ProfileName;
