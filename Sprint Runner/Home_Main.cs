@@ -46,10 +46,20 @@ namespace Sprint_Runner
             }
             else
             {
-                /* Create New Settings File */
-                Save_Information_Settings settings = new Save_Information_Settings();
-                settings.SelectedProfile = "";
-                Save_Data.SaveData(settings, SettingsDirectory, SettingsFileName);
+                DialogResult newInstall = MessageBox.Show("Welcome! Would you like to create your profile to get started?", "Welcome", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                if (newInstall == DialogResult.Yes)
+                {
+                    Profile_Create profileCreate = new Profile_Create(this);
+                    profileCreate.ShowDialog();
+                }
+                else
+                {
+                    /* Create New Settings File */
+                    Save_Information_Settings settings = new Save_Information_Settings();
+                    settings.SelectedProfile = "";
+                    Save_Data.SaveData(settings, SettingsDirectory, SettingsFileName);
+                }
             }
         }
         public void reloadProfile()

@@ -29,11 +29,6 @@ namespace Sprint_Runner
             loadSettings();
         }
 
-        private void Profile_Edit_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void loadSettings()
         {
             /* Settings Data Loading */
@@ -41,7 +36,10 @@ namespace Sprint_Runner
             FileStream read = new FileStream(SettingsDirectory + SettingsFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
             Save_Information_Settings info = (Save_Information_Settings)xs.Deserialize(read);
             SelectedProfile = info.SelectedProfile;
+
+            /*  Make Sure To Stop Reading The File */
             read.Close();
+
             if (SelectedProfile == "")
             {
                 MessageBox.Show("No Profile Selected!");
@@ -62,8 +60,10 @@ namespace Sprint_Runner
 
                 /* Load Player Information */
                 txtProfileName.Text = info.ProfileName;
+                this.Text = "Profile Edit | " + SelectedProfile;
+                this.Refresh();
 
-                /* Load Player Avatar (Need to find a better way of doing this) */
+                /* Load Player Avatar */
                 cmbAvatar.Text = info.ProfileAvatar;
                 if (cmbAvatar.Text == "Mario")
                 {
@@ -86,6 +86,9 @@ namespace Sprint_Runner
                     picAvatarPreview.Image = Properties.Resources.Block_Question;
                 }
                 cmbDifficulty.Text = info.Difficulty;
+
+                /*  Make Sure To Stop Reading The File */
+                read.Close();
             }
         }
     }

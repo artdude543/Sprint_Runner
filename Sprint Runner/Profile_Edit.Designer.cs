@@ -147,7 +147,6 @@
             this.Style = MetroFramework.MetroColorStyle.Silver;
             this.Text = "Profile Edit |";
             this.TopMost = true;
-            this.Load += new System.EventHandler(this.Profile_Edit_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picAvatarPreview)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

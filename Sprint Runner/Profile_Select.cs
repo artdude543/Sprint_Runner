@@ -72,7 +72,7 @@ namespace Sprint_Runner
             }
             else
             {
-                MessageBox.Show("You have selected - " + selectedProfile + "'s profile");
+                MessageBox.Show("You have selected - " + selectedProfile + "'s profile"); /* Debug Message */
 
                 /* Settings Data Saving */
                 Save_Information_Settings settings = new Save_Information_Settings();

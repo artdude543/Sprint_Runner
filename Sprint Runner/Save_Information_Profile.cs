@@ -15,9 +15,6 @@ namespace Sprint_Runner
         private int totalScore; 
         private int totalWins;
 
-        /* Application Settings */
-        private string selectedProfile;
-
         public string ProfileName
         {
             get { return profileName; }
@@ -46,12 +43,6 @@ namespace Sprint_Runner
         {
             get { return totalWins; }
             set { totalWins = value; }
-        }
-
-        public string SelectedProfile
-        {
-            get { return selectedProfile; }
-            set { selectedProfile = value; }
         }
     }
 }
