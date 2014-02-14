@@ -99,6 +99,7 @@
             this.Name = "Home_Main";
             this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.DropShadow;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Silver;
             this.Text = "Sprint Runner V2.0";
             this.ResumeLayout(false);

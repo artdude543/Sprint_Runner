@@ -39,7 +39,7 @@
             this.cmdProfiles.Location = new System.Drawing.Point(148, 83);
             this.cmdProfiles.Name = "cmdProfiles";
             this.cmdProfiles.Size = new System.Drawing.Size(121, 21);
-            this.cmdProfiles.TabIndex = 0;
+            this.cmdProfiles.TabIndex = 1;
             this.cmdProfiles.SelectedIndexChanged += new System.EventHandler(this.cmdProfiles_SelectedIndexChanged);
             // 
             // lblSelectProfile

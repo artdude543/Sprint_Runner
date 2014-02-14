@@ -69,7 +69,7 @@
             this.cmbAvatar.Location = new System.Drawing.Point(119, 86);
             this.cmbAvatar.Name = "cmbAvatar";
             this.cmbAvatar.Size = new System.Drawing.Size(131, 21);
-            this.cmbAvatar.TabIndex = 15;
+            this.cmbAvatar.TabIndex = 2;
             this.cmbAvatar.SelectedIndexChanged += new System.EventHandler(this.cmbAvatar_SelectedIndexChanged);
             // 
             // lblAvatar
@@ -110,7 +110,7 @@
             this.cmbDifficulty.Location = new System.Drawing.Point(119, 180);
             this.cmbDifficulty.Name = "cmbDifficulty";
             this.cmbDifficulty.Size = new System.Drawing.Size(131, 21);
-            this.cmbDifficulty.TabIndex = 11;
+            this.cmbDifficulty.TabIndex = 3;
             this.cmbDifficulty.SelectedIndexChanged += new System.EventHandler(this.cmbDifficulty_SelectedIndexChanged);
             // 
             // txtProfileName
@@ -123,7 +123,7 @@
             this.txtProfileName.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtProfileName.SelectedText = "";
             this.txtProfileName.Size = new System.Drawing.Size(131, 20);
-            this.txtProfileName.TabIndex = 10;
+            this.txtProfileName.TabIndex = 1;
             this.txtProfileName.UseSelectable = true;
             // 
             // cmdSave
@@ -132,7 +132,7 @@
             this.cmdSave.Location = new System.Drawing.Point(238, 270);
             this.cmdSave.Name = "cmdSave";
             this.cmdSave.Size = new System.Drawing.Size(75, 23);
-            this.cmdSave.TabIndex = 18;
+            this.cmdSave.TabIndex = 4;
             this.cmdSave.Text = "Save";
             this.cmdSave.UseVisualStyleBackColor = true;
             this.cmdSave.Click += new System.EventHandler(this.cmdSave_Click);

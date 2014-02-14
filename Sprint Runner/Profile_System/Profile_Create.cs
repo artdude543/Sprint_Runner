@@ -62,15 +62,15 @@ namespace Sprint_Runner
                 error = true;
                 errorMessage = "Profile Name Not Entered!";
             }
-            else if (cmbDifficulty.Text == "")
-            {
-                error = true;
-                errorMessage = "Difficulty Not Set!";
-            }
             else if (cmbAvatar.Text == "")
             {
                 error = true;
                 errorMessage = "Avatar Not Set!";
+            }
+            else if (cmbDifficulty.Text == "")
+            {
+                error = true;
+                errorMessage = "Difficulty Not Set!";
             }
             if (!error)
             {
@@ -78,7 +78,7 @@ namespace Sprint_Runner
                 {
                     if (File.Exists(profilesDirectory + txtProfileName.Text + ".xml"))
                     {
-                        MessageBox.Show("Profile Save Already Exists! Please Choose Another Profile Name.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Profile Save '" + txtProfileName.Text + "' Already Exists! Please Choose Another Profile Name.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     else
                     {
@@ -112,7 +112,7 @@ namespace Sprint_Runner
             }
             else
             {
-                MessageBox.Show("Please Correct Your Errors Before Continuing. Error: " + errorMessage, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("The Following Errors Was Encountered - " + errorMessage, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 error = false;
             }
         }

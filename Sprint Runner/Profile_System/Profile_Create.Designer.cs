@@ -63,7 +63,7 @@
             this.cmbDifficulty.Location = new System.Drawing.Point(119, 180);
             this.cmbDifficulty.Name = "cmbDifficulty";
             this.cmbDifficulty.Size = new System.Drawing.Size(131, 21);
-            this.cmbDifficulty.TabIndex = 2;
+            this.cmbDifficulty.TabIndex = 3;
             // 
             // lblProfileName
             // 
@@ -88,7 +88,7 @@
             this.cmdCreate.Location = new System.Drawing.Point(163, 270);
             this.cmdCreate.Name = "cmdCreate";
             this.cmdCreate.Size = new System.Drawing.Size(87, 23);
-            this.cmdCreate.TabIndex = 5;
+            this.cmdCreate.TabIndex = 4;
             this.cmdCreate.Text = "Create Profile";
             this.cmdCreate.UseVisualStyleBackColor = true;
             this.cmdCreate.Click += new System.EventHandler(this.cmdCreate_Click);
@@ -114,7 +114,7 @@
             this.cmbAvatar.Location = new System.Drawing.Point(119, 86);
             this.cmbAvatar.Name = "cmbAvatar";
             this.cmbAvatar.Size = new System.Drawing.Size(131, 21);
-            this.cmbAvatar.TabIndex = 7;
+            this.cmbAvatar.TabIndex = 2;
             this.cmbAvatar.SelectedIndexChanged += new System.EventHandler(this.cmbAvatar_SelectedIndexChanged);
             // 
             // picAvatarPreview
