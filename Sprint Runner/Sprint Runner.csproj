@@ -65,22 +65,22 @@
       <DependentUpon>Home_Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Save_Information_Profile.cs" />
-    <Compile Include="Profile Forms\Profile_Create.cs">
+    <Compile Include="Profile_System\Profile_Create.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Profile Forms\Profile_Create.Designer.cs">
+    <Compile Include="Profile_System\Profile_Create.Designer.cs">
       <DependentUpon>Profile_Create.cs</DependentUpon>
     </Compile>
-    <Compile Include="Profile Forms\Profile_Edit.cs">
+    <Compile Include="Profile_System\Profile_Edit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Profile Forms\Profile_Edit.Designer.cs">
+    <Compile Include="Profile_System\Profile_Edit.Designer.cs">
       <DependentUpon>Profile_Edit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Profile Forms\Profile_Select.cs">
+    <Compile Include="Profile_System\Profile_Select.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Profile Forms\Profile_Select.Designer.cs">
+    <Compile Include="Profile_System\Profile_Select.Designer.cs">
       <DependentUpon>Profile_Select.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -90,13 +90,13 @@
     <EmbeddedResource Include="Home_Main.resx">
       <DependentUpon>Home_Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Profile Forms\Profile_Create.resx">
+    <EmbeddedResource Include="Profile_System\Profile_Create.resx">
       <DependentUpon>Profile_Create.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Profile Forms\Profile_Edit.resx">
+    <EmbeddedResource Include="Profile_System\Profile_Edit.resx">
       <DependentUpon>Profile_Edit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Profile Forms\Profile_Select.resx">
+    <EmbeddedResource Include="Profile_System\Profile_Select.resx">
       <DependentUpon>Profile_Select.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
