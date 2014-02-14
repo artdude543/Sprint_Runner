@@ -24,12 +24,15 @@ namespace Sprint_Runner
 
         bool EnableEditing = false;
         bool Edited = false;
+
         string AvatarName;
+        string Difficulty;
 
         public Profile_Edit()
         {
             InitializeComponent();
 
+            /* Load Settings / Profile */
             loadSettings();
         }
 
@@ -46,16 +49,19 @@ namespace Sprint_Runner
 
             if (SelectedProfile == "")
             {
+                /* Show MessageBox If No Profile Is Selected/Loaded */
                 MessageBox.Show("No Profile Selected!");
             }
             else
             {
+                /* Load Profile Data */
                 loadProfileData();
             }
         }
 
         private void loadProfileData()
         {
+            /* Double Check That The Profile Exists And Then Open It */
             if (File.Exists(ProfilesDirectory + SelectedProfile + ".xml"))
             {
                 XmlSerializer xs = new XmlSerializer(typeof(Save_Information_Profile));
@@ -90,11 +96,13 @@ namespace Sprint_Runner
                 {
                     picAvatarPreview.Image = Properties.Resources.Block_Question;
                 }
+
+                /* Load Player Difficulty */
                 cmbDifficulty.Text = info.Difficulty;
+                Difficulty = info.Difficulty;
 
-                /*  Make Sure To Stop Reading The File */
+                /*  Make Sure To Stop Reading The File + Make Editing 'True' */
                 read.Close();
-
                 EnableEditing = true;
             }
         }
@@ -105,14 +113,18 @@ namespace Sprint_Runner
             {
                 try
                 {
+                    /* Save New Data To The User Profile */
                     Save_Information_Profile info = new Save_Information_Profile();
                     info.ProfileName = txtProfileName.Text;
                     info.ProfileAvatar = cmbAvatar.Text;
                     info.Difficulty = cmbDifficulty.Text;
                     Save_Data.SaveData(info, ProfilesDirectory, txtProfileName.Text + ".xml");
 
+                    /* Show MessageBox + Change Edited To 'False' */
                     MessageBox.Show("Sucessfully edited your profile!");
+                    Edited = false;
 
+                    /* Close This Form */
                     this.Close();
                 }
                 catch (Exception ex)
@@ -124,6 +136,7 @@ namespace Sprint_Runner
 
         private void cmdSave_Click(object sender, EventArgs e)
         {
+            /* Save Profile Data + Set Edited To 'False' */
             saveProfileData();
             Edited = false;
         }
@@ -134,6 +147,16 @@ namespace Sprint_Runner
             {
                 Edited = true;
                 cmdSave.Enabled = true;
+            }
+            else if (!(cmbDifficulty.Text == Difficulty))
+            {
+                Edited = true;
+                cmdSave.Enabled = true;
+            }
+            else
+            {
+                Edited = false;
+                cmdSave.Enabled = false;
             }
         }
 
@@ -168,6 +191,7 @@ namespace Sprint_Runner
 
         private void cmbDifficulty_SelectedIndexChanged(object sender, EventArgs e)
         {
+            /* Checks If Editing Is Enabled And If Changed Run 'checkEdited()' Function */
             if (EnableEditing)
             {
                 checkEdited();
