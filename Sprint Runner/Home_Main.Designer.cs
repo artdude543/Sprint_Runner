@@ -32,6 +32,7 @@
             this.cmdProfileEdit = new System.Windows.Forms.Button();
             this.cmdProfileSelect = new System.Windows.Forms.Button();
             this.lblCurrentProfile = new MetroFramework.Controls.MetroLabel();
+            this.cmdPlay = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmdCreateNew
@@ -73,12 +74,23 @@
             this.lblCurrentProfile.TabIndex = 13;
             this.lblCurrentProfile.Text = "Current Profile:";
             // 
+            // cmdPlay
+            // 
+            this.cmdPlay.Enabled = false;
+            this.cmdPlay.Location = new System.Drawing.Point(223, 199);
+            this.cmdPlay.Name = "cmdPlay";
+            this.cmdPlay.Size = new System.Drawing.Size(120, 23);
+            this.cmdPlay.TabIndex = 14;
+            this.cmdPlay.Text = "Start Game";
+            this.cmdPlay.UseVisualStyleBackColor = true;
+            // 
             // Home_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(366, 336);
+            this.Controls.Add(this.cmdPlay);
             this.Controls.Add(this.lblCurrentProfile);
             this.Controls.Add(this.cmdProfileSelect);
             this.Controls.Add(this.cmdProfileEdit);
@@ -100,6 +112,7 @@
         private System.Windows.Forms.Button cmdProfileEdit;
         private System.Windows.Forms.Button cmdProfileSelect;
         private MetroFramework.Controls.MetroLabel lblCurrentProfile;
+        private System.Windows.Forms.Button cmdPlay;
     }
 }
 
