@@ -36,6 +36,7 @@
             this.lblProfileName = new MetroFramework.Controls.MetroLabel();
             this.cmbDifficulty = new System.Windows.Forms.ComboBox();
             this.txtProfileName = new MetroFramework.Controls.MetroTextBox();
+            this.cmdSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picAvatarPreview)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,6 +70,7 @@
             this.cmbAvatar.Name = "cmbAvatar";
             this.cmbAvatar.Size = new System.Drawing.Size(131, 21);
             this.cmbAvatar.TabIndex = 15;
+            this.cmbAvatar.SelectedIndexChanged += new System.EventHandler(this.cmbAvatar_SelectedIndexChanged);
             // 
             // lblAvatar
             // 
@@ -109,6 +111,7 @@
             this.cmbDifficulty.Name = "cmbDifficulty";
             this.cmbDifficulty.Size = new System.Drawing.Size(131, 21);
             this.cmbDifficulty.TabIndex = 11;
+            this.cmbDifficulty.SelectedIndexChanged += new System.EventHandler(this.cmbDifficulty_SelectedIndexChanged);
             // 
             // txtProfileName
             // 
@@ -123,12 +126,24 @@
             this.txtProfileName.TabIndex = 10;
             this.txtProfileName.UseSelectable = true;
             // 
+            // cmdSave
+            // 
+            this.cmdSave.Enabled = false;
+            this.cmdSave.Location = new System.Drawing.Point(238, 270);
+            this.cmdSave.Name = "cmdSave";
+            this.cmdSave.Size = new System.Drawing.Size(75, 23);
+            this.cmdSave.TabIndex = 18;
+            this.cmdSave.Text = "Save";
+            this.cmdSave.UseVisualStyleBackColor = true;
+            this.cmdSave.Click += new System.EventHandler(this.cmdSave_Click);
+            // 
             // Profile_Edit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(336, 316);
+            this.Controls.Add(this.cmdSave);
             this.Controls.Add(this.lblAvatarPreview);
             this.Controls.Add(this.picAvatarPreview);
             this.Controls.Add(this.cmbAvatar);
@@ -147,6 +162,7 @@
             this.Style = MetroFramework.MetroColorStyle.Silver;
             this.Text = "Profile Edit |";
             this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Profile_Edit_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.picAvatarPreview)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -163,6 +179,7 @@
         private MetroFramework.Controls.MetroLabel lblProfileName;
         private System.Windows.Forms.ComboBox cmbDifficulty;
         private MetroFramework.Controls.MetroTextBox txtProfileName;
+        private System.Windows.Forms.Button cmdSave;
 
     }
 }
