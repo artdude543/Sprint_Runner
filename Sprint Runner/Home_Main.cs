@@ -121,5 +121,10 @@ namespace Sprint_Runner
             raceMain.Show();
             this.Hide();
         }
+
+        private void Home_Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

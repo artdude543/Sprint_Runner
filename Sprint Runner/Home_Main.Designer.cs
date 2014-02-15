@@ -103,6 +103,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Silver;
             this.Text = "Sprint Runner V2.0";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Home_Main_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
