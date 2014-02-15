@@ -114,5 +114,12 @@ namespace Sprint_Runner
             Profile_Select profileSelect = new Profile_Select(this);
             profileSelect.ShowDialog();
         }
+
+        private void cmdPlay_Click(object sender, EventArgs e)
+        {
+            Race_Main raceMain = new Race_Main(this);
+            raceMain.Show();
+            this.Hide();
+        }
     }
 }

@@ -83,6 +83,7 @@
             this.cmdPlay.TabIndex = 14;
             this.cmdPlay.Text = "Start Game";
             this.cmdPlay.UseVisualStyleBackColor = true;
+            this.cmdPlay.Click += new System.EventHandler(this.cmdPlay_Click);
             // 
             // Home_Main
             // 

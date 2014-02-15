@@ -64,6 +64,12 @@
     <Compile Include="Home_Main.Designer.cs">
       <DependentUpon>Home_Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Race_System\Race_Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Race_System\Race_Main.Designer.cs">
+      <DependentUpon>Race_Main.cs</DependentUpon>
+    </Compile>
     <Compile Include="Save_Information_Profile.cs" />
     <Compile Include="Profile_System\Profile_Create.cs">
       <SubType>Form</SubType>
@@ -109,6 +115,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Race_System\Race_Main.resx">
+      <DependentUpon>Race_Main.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
